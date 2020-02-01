@@ -38,21 +38,31 @@ func _physics_process(_delta):
 #    emit_signal("player_died")
 		get_tree().paused = true
 
-#Handle Attack input
+#Handle Input
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		if event.pressed and not dashing:
 	#      emit_signal("player_attack")
 			attacking = true
 			direction = Vector2(0, 0)
-			
 			var damage_box = DAMAGE_BOX_SCN.instance()
 			damage_box.init(self)
 			var attack_angle = get_closest_cardinal_angle(self.look_angle)
+			print(attack_angle)
 			var attack_offset = Vector2(50,0).rotated(attack_angle)
 			damage_box.position = self.position + $AttackOrigin.position + attack_offset
 			get_parent().add_child(damage_box)
-#			$Sprite.strike(attack_offset)
+			if (attack_angle > 1.0):
+				if (attack_angle > 2.0):
+					$Sprite/AnimationPlayer.current_animation = "Attack_Left"
+				else:
+					$Sprite/AnimationPlayer.current_animation = "Attack_Downward"
+			else:
+				if (attack_angle < -0.5):
+					$Sprite/AnimationPlayer.current_animation = "Attack_Upward"
+				else:
+					$Sprite/AnimationPlayer.current_animation = "Attack_Right"
+			$Sprite/AnimationPlayer.play()
 
 func get_closest_cardinal_angle(angle):
 	if angle >= -PI/4 and angle <= PI/4:
@@ -63,6 +73,7 @@ func get_closest_cardinal_angle(angle):
 		return PI
 	elif angle >= -3*PI/4 and angle <= -PI/4:
 		return -PI/2
+
 
 #func receive_damage(damage: int, vector: Vector2, attack_phase: int = 0):
 #  if damage > 0 and !self.is_invulnerable:
@@ -93,32 +104,42 @@ func handle_dash_input():
 	if Input.is_action_just_pressed("ui_select") and not attacking and can_dash:
 		if Input.is_action_pressed("ui_up") and !Input.is_action_pressed("ui_left") and !Input.is_action_pressed("ui_right"):
 			dash_direction = Vector2(0,-1)
+			$Sprite/AnimationPlayer.current_animation = "Dash_Upward"
 			setup_dash()
 		elif Input.is_action_pressed("ui_up") and Input.is_action_pressed("ui_left") and !Input.is_action_pressed("ui_right"):
 			dash_direction = Vector2(-1,-1)
+			$Sprite/AnimationPlayer.current_animation = "Dash_Left"
 			setup_dash()
 		elif !Input.is_action_pressed("ui_up") and Input.is_action_pressed("ui_left") and !Input.is_action_pressed("ui_down"):
 			dash_direction = Vector2(-1,0)
+			$Sprite/AnimationPlayer.current_animation = "Dash_Left"
 			setup_dash()
 		elif Input.is_action_pressed("ui_left") and Input.is_action_pressed("ui_down") and !Input.is_action_pressed("ui_right"):
 			dash_direction = Vector2(-1,1)
+			$Sprite/AnimationPlayer.current_animation = "Dash_Left"
 			setup_dash()
 		elif !Input.is_action_pressed("ui_left") and Input.is_action_pressed("ui_down") and !Input.is_action_pressed("ui_right"):
 			dash_direction = Vector2(0,1)
+			$Sprite/AnimationPlayer.current_animation = "Dash_Downward"
 			setup_dash()
 		elif !Input.is_action_pressed("ui_left") and Input.is_action_pressed("ui_down") and Input.is_action_pressed("ui_right"):
 			dash_direction = Vector2(1,1)
+			$Sprite/AnimationPlayer.current_animation = "Dash_Right"
 			setup_dash()
 		elif Input.is_action_pressed("ui_right") and !Input.is_action_pressed("ui_down") and !Input.is_action_pressed("ui_up"):
 			dash_direction = Vector2(1,0)
+			$Sprite/AnimationPlayer.current_animation = "Dash_Right"
 			setup_dash()
 		elif !Input.is_action_pressed("ui_left") and Input.is_action_pressed("ui_up") and Input.is_action_pressed("ui_right"):
 			dash_direction = Vector2(1,-1)
+			$Sprite/AnimationPlayer.current_animation = "Dash_Right"
 			setup_dash()
 		else:
 			dash_direction = Vector2(0,1)
+			$Sprite/AnimationPlayer.current_animation = "Dash_Downward"
 			setup_dash()
-
+		$Sprite/AnimationPlayer.play()
+		
 func setup_dash():
 	#$Sprite/SFXDash.pitch_scale = randf() + 1.0
 	#$Sprite/SFXDash.play()
