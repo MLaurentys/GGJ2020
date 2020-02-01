@@ -12,6 +12,8 @@ func fix_building():
 	if health < max_health:
 		health += 1
 		$ProgressBar.setHealth()
+		return true
+	return false
 		
 func interact():
 	print("Interagiu")

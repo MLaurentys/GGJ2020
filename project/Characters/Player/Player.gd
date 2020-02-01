@@ -28,16 +28,13 @@ func _ready():
 	$DashCooldown.wait_time = dash_cooldown
 
 func _physics_process(_delta):
-	# Those check contacts must BE REMOVED and activated by player input
-	self.check_contact_to_fix()
-	self.check_contact_to_interact()
-	
 	if not attacking and not dashing:
 		update_direction_from_input()
 
 	update_look_angle()
 	blink_if_invulnerable()
 	handle_dash_input()
+	handle_input()
 
 	if dashing:
 		move_and_slide(dash_speed * dash_direction.normalized())
@@ -48,7 +45,8 @@ func _physics_process(_delta):
 
 #Handle Input
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
+	# Left mouse button is clicked
+	if event is InputEventMouseButton and event.button_index == 1:
 		if event.pressed and not dashing:
 	#      emit_signal("player_attack")
 			attacking = true
@@ -71,6 +69,7 @@ func _input(event: InputEvent) -> void:
 				else:
 					$Sprite/AnimationPlayer.current_animation = "Attack_Right"
 			$Sprite/AnimationPlayer.play()
+			
 
 func get_closest_cardinal_angle(angle):
 	if angle >= -PI/4 and angle <= PI/4:
@@ -119,6 +118,12 @@ func blink_if_invulnerable():
 	else:
 		self.modulate.a = 1.0
 
+func handle_input():
+	if Input.is_action_pressed("fix"):
+		self.check_contact_to_fix()
+	if Input.is_action_just_pressed("interact"):
+		self.check_contact_to_interact()
+		
 func handle_dash_input():
 	if Input.is_action_just_pressed("ui_select") and not attacking and can_dash:
 		if Input.is_action_pressed("ui_up") and !Input.is_action_pressed("ui_left") and !Input.is_action_pressed("ui_right"):
@@ -188,9 +193,12 @@ func check_contact_to_fix():
 	if $FixCooldown.time_left <= 0:
 		for area in $Area2D.get_overlapping_areas():
 			if area.is_in_group("fixarea"):
-				area.get_parent().fix_building()
-				$FixCooldown.start()
-				break
+				if area.get_parent().fix_building():
+					$FixCooldown.start()
+					# Change animation
+					$Sprite/AnimationPlayer.current_animation = "Attack_Upward"
+					$Sprite/AnimationPlayer.play()
+					break
 				
 func check_contact_to_interact():
 	for area in $Area2D.get_overlapping_areas():
