@@ -12,6 +12,10 @@ var dash_direction: Vector2
 var dashing := false
 var dash_speed: float = dash_length / dash_time
 
+var hud
+onready var energy = 100
+onready var attack = 100
+onready var shield = 100
 
 var look_angle: float = 0.0
 var attacking := false
@@ -19,6 +23,7 @@ onready var is_invulnerable = false
 
 func _ready():
 	var locator = Locator.new(get_tree())
+	hud = locator.find_entity("HUD")
 	#var player = locator.find_entity("player")
 	$DashCooldown.wait_time = dash_cooldown
 
@@ -76,7 +81,18 @@ func get_closest_cardinal_angle(angle):
 	elif angle >= -3*PI/4 and angle <= -PI/4:
 		return -PI/2
 
-
+func change_health(amt :int):
+	health += amt
+	hud.change_health(health)
+func change_energy(amt :int):
+	energy += amt
+	hud.change_energy(energy)
+func change_attack(amt :int):
+	attack += amt
+	hud.change_attack(attack)
+func change_shield(amt :int):
+	shield += amt
+	hud.change_shield(shield)
 #func receive_damage(damage: int, vector: Vector2, attack_phase: int = 0):
 #  if damage > 0 and !self.is_invulnerable:
 #    .receive_damage(damage, vector, attack_phase)
