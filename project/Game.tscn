@@ -1,0 +1,9 @@
+[gd_scene format=2]
+
+[node name="World" type="YSort"]
+
+[node name="Background" type="TileMap" parent="."]
+format = 1
+
+[node name="Foreground" type="TileMap" parent="."]
+format = 1
