@@ -17,6 +17,7 @@ onready var energy = 100
 onready var attack = 100
 onready var shield = 100
 
+var state_machine
 var look_angle: float = 0.0
 var attacking := false
 onready var is_invulnerable = false
@@ -26,6 +27,7 @@ func _ready():
 	hud = locator.find_entity("HUD")
 	#var player = locator.find_entity("player")
 	$DashCooldown.wait_time = dash_cooldown
+	state_machine = $AnimationTree.get("parameters/playback")
 
 func _physics_process(_delta):
 	if not attacking and not dashing:
@@ -60,16 +62,14 @@ func _input(event: InputEvent) -> void:
 			get_parent().add_child(damage_box)
 			if (attack_angle > 1.0):
 				if (attack_angle > 2.0):
-					$Sprite/AnimationPlayer.current_animation = "Attack_Left"
+					state_machine.travel("Attack_Left")
 				else:
-					$Sprite/AnimationPlayer.current_animation = "Attack_Downward"
+					state_machine.travel("Attack_Downward")
 			else:
 				if (attack_angle < -0.5):
-					$Sprite/AnimationPlayer.current_animation = "Attack_Upward"
+					state_machine.travel("Attack_Upward")
 				else:
-					$Sprite/AnimationPlayer.current_animation = "Attack_Right"
-			$Sprite/AnimationPlayer.play()
-			
+					state_machine.travel("Attack_Right")
 
 func get_closest_cardinal_angle(angle):
 	if angle >= -PI/4 and angle <= PI/4:
