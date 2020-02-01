@@ -8,9 +8,26 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "KinematicBody2D",
+"class": "BaseCharacter",
+"language": "GDScript",
+"path": "res://Characters/BaseCharacter.gd"
+}, {
+"base": "Object",
+"class": "Locator",
+"language": "GDScript",
+"path": "res://Common/Locator.gd"
+}, {
+"base": "BaseCharacter",
+"class": "Player",
+"language": "GDScript",
+"path": "res://Characters/Player/Player.gd"
+} ]
 _global_script_class_icons={
-
+"BaseCharacter": "",
+"Locator": "",
+"Player": ""
 }
 
 [application]
