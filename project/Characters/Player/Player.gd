@@ -46,7 +46,7 @@ func _physics_process(_delta):
 #Handle Input
 func _input(event: InputEvent) -> void:
 	# Left mouse button is clicked
-	if event is InputEventMouseButton and event.button_index == 1:
+	if event is InputEventMouseButton and event.button_index == 1 and $Sprite/AnimationPlayer.current_animation != "Reconstruct":
 		if event.pressed and not dashing:
 	#      emit_signal("player_attack")
 			attacking = true
@@ -195,8 +195,7 @@ func check_contact_to_fix():
 			if area.is_in_group("fixarea"):
 				if area.get_parent().fix_building():
 					$FixCooldown.start()
-					# Change animation
-					$Sprite/AnimationPlayer.current_animation = "Attack_Upward"
+					$Sprite/AnimationPlayer.current_animation = "Reconstruct"
 					$Sprite/AnimationPlayer.play()
 					break
 				
