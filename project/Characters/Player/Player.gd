@@ -28,7 +28,10 @@ func _ready():
 	$DashCooldown.wait_time = dash_cooldown
 
 func _physics_process(_delta):
+	# Those check contacts must BE REMOVED and activated by player input
 	self.check_contact_to_fix()
+	self.check_contact_to_interact()
+	
 	if not attacking and not dashing:
 		update_direction_from_input()
 
@@ -188,6 +191,12 @@ func check_contact_to_fix():
 				area.get_parent().fix_building()
 				$FixCooldown.start()
 				break
+				
+func check_contact_to_interact():
+	for area in $Area2D.get_overlapping_areas():
+		if area.is_in_group("interactarea"):
+			area.get_parent().interact()
+			break
 
 
 
