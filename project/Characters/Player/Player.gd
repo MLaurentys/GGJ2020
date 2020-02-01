@@ -23,7 +23,7 @@ func _ready():
 	$DashCooldown.wait_time = dash_cooldown
 
 func _physics_process(_delta):
-	#self.check_contact()
+	self.check_contact()
 	if not attacking and not dashing:
 		update_direction_from_input()
 
@@ -144,14 +144,15 @@ func stop_dash():
 func _on_InvulnerabilityTimer_timeout():
 	self.is_invulnerable = false
 	
-#func check_contact():
-#	print("oi")
-#	if $ContactCooldown.time_left <= 0:
-#		for area in $CollisionShape2D.get_overlapping_areas():
-#			if area.is_in_group("buildings"):
-#				area.get_parent().fix_building()
-#				$ContactCooldown.start()
-#				break
-#
+func check_contact():
+	if $ContactCooldown.time_left <= 0:
+		for area in $Area2D.get_overlapping_areas():
+			print("hello")
+			if area.get_parent().is_in_group("buildings"):
+				print("hi")
+				area.get_parent().fix_building()
+				$ContactCooldown.start()
+				break
+
 
 
