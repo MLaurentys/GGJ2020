@@ -193,9 +193,12 @@ func check_contact_to_fix():
 	if $FixCooldown.time_left <= 0:
 		for area in $Area2D.get_overlapping_areas():
 			if area.is_in_group("fixarea"):
-				area.get_parent().fix_building()
-				$FixCooldown.start()
-				break
+				if area.get_parent().fix_building():
+					$FixCooldown.start()
+					# Change animation
+					$Sprite/AnimationPlayer.current_animation = "Attack_Upward"
+					$Sprite/AnimationPlayer.play()
+					break
 				
 func check_contact_to_interact():
 	for area in $Area2D.get_overlapping_areas():
