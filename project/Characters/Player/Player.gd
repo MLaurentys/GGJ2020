@@ -12,6 +12,10 @@ var dash_direction: Vector2
 var dashing := false
 var dash_speed: float = dash_length / dash_time
 
+var hud
+onready var energy = 100
+onready var attack = 100
+onready var shield = 100
 
 var look_angle: float = 0.0
 var attacking := false
@@ -19,17 +23,18 @@ onready var is_invulnerable = false
 
 func _ready():
 	var locator = Locator.new(get_tree())
+	hud = locator.find_entity("HUD")
 	#var player = locator.find_entity("player")
 	$DashCooldown.wait_time = dash_cooldown
 
 func _physics_process(_delta):
-	#self.check_contact()
 	if not attacking and not dashing:
 		update_direction_from_input()
 
 	update_look_angle()
 	blink_if_invulnerable()
 	handle_dash_input()
+	handle_input()
 
 	if dashing:
 		move_and_slide(dash_speed * dash_direction.normalized())
@@ -38,21 +43,33 @@ func _physics_process(_delta):
 #    emit_signal("player_died")
 		get_tree().paused = true
 
-#Handle Attack input
+#Handle Input
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
+	# Left mouse button is clicked
+	if event is InputEventMouseButton and event.button_index == 1:
 		if event.pressed and not dashing:
 	#      emit_signal("player_attack")
 			attacking = true
 			direction = Vector2(0, 0)
-			
 			var damage_box = DAMAGE_BOX_SCN.instance()
 			damage_box.init(self)
 			var attack_angle = get_closest_cardinal_angle(self.look_angle)
+			print(attack_angle)
 			var attack_offset = Vector2(50,0).rotated(attack_angle)
 			damage_box.position = self.position + $AttackOrigin.position + attack_offset
 			get_parent().add_child(damage_box)
-#			$Sprite.strike(attack_offset)
+			if (attack_angle > 1.0):
+				if (attack_angle > 2.0):
+					$Sprite/AnimationPlayer.current_animation = "Attack_Left"
+				else:
+					$Sprite/AnimationPlayer.current_animation = "Attack_Downward"
+			else:
+				if (attack_angle < -0.5):
+					$Sprite/AnimationPlayer.current_animation = "Attack_Upward"
+				else:
+					$Sprite/AnimationPlayer.current_animation = "Attack_Right"
+			$Sprite/AnimationPlayer.play()
+			
 
 func get_closest_cardinal_angle(angle):
 	if angle >= -PI/4 and angle <= PI/4:
@@ -64,6 +81,18 @@ func get_closest_cardinal_angle(angle):
 	elif angle >= -3*PI/4 and angle <= -PI/4:
 		return -PI/2
 
+func change_health(amt :int):
+	health += amt
+	hud.change_health(health)
+func change_energy(amt :int):
+	energy += amt
+	hud.change_energy(energy)
+func change_attack(amt :int):
+	attack += amt
+	hud.change_attack(attack)
+func change_shield(amt :int):
+	shield += amt
+	hud.change_shield(shield)
 #func receive_damage(damage: int, vector: Vector2, attack_phase: int = 0):
 #  if damage > 0 and !self.is_invulnerable:
 #    .receive_damage(damage, vector, attack_phase)
@@ -89,36 +118,52 @@ func blink_if_invulnerable():
 	else:
 		self.modulate.a = 1.0
 
+func handle_input():
+	if Input.is_action_pressed("fix"):
+		self.check_contact_to_fix()
+	if Input.is_action_just_pressed("interact"):
+		self.check_contact_to_interact()
+		
 func handle_dash_input():
 	if Input.is_action_just_pressed("ui_select") and not attacking and can_dash:
 		if Input.is_action_pressed("ui_up") and !Input.is_action_pressed("ui_left") and !Input.is_action_pressed("ui_right"):
 			dash_direction = Vector2(0,-1)
+			$Sprite/AnimationPlayer.current_animation = "Dash_Upward"
 			setup_dash()
 		elif Input.is_action_pressed("ui_up") and Input.is_action_pressed("ui_left") and !Input.is_action_pressed("ui_right"):
 			dash_direction = Vector2(-1,-1)
+			$Sprite/AnimationPlayer.current_animation = "Dash_Left"
 			setup_dash()
 		elif !Input.is_action_pressed("ui_up") and Input.is_action_pressed("ui_left") and !Input.is_action_pressed("ui_down"):
 			dash_direction = Vector2(-1,0)
+			$Sprite/AnimationPlayer.current_animation = "Dash_Left"
 			setup_dash()
 		elif Input.is_action_pressed("ui_left") and Input.is_action_pressed("ui_down") and !Input.is_action_pressed("ui_right"):
 			dash_direction = Vector2(-1,1)
+			$Sprite/AnimationPlayer.current_animation = "Dash_Left"
 			setup_dash()
 		elif !Input.is_action_pressed("ui_left") and Input.is_action_pressed("ui_down") and !Input.is_action_pressed("ui_right"):
 			dash_direction = Vector2(0,1)
+			$Sprite/AnimationPlayer.current_animation = "Dash_Downward"
 			setup_dash()
 		elif !Input.is_action_pressed("ui_left") and Input.is_action_pressed("ui_down") and Input.is_action_pressed("ui_right"):
 			dash_direction = Vector2(1,1)
+			$Sprite/AnimationPlayer.current_animation = "Dash_Right"
 			setup_dash()
 		elif Input.is_action_pressed("ui_right") and !Input.is_action_pressed("ui_down") and !Input.is_action_pressed("ui_up"):
 			dash_direction = Vector2(1,0)
+			$Sprite/AnimationPlayer.current_animation = "Dash_Right"
 			setup_dash()
 		elif !Input.is_action_pressed("ui_left") and Input.is_action_pressed("ui_up") and Input.is_action_pressed("ui_right"):
 			dash_direction = Vector2(1,-1)
+			$Sprite/AnimationPlayer.current_animation = "Dash_Right"
 			setup_dash()
 		else:
 			dash_direction = Vector2(0,1)
+			$Sprite/AnimationPlayer.current_animation = "Dash_Downward"
 			setup_dash()
-
+		$Sprite/AnimationPlayer.play()
+		
 func setup_dash():
 	#$Sprite/SFXDash.pitch_scale = randf() + 1.0
 	#$Sprite/SFXDash.play()
@@ -144,14 +189,22 @@ func stop_dash():
 func _on_InvulnerabilityTimer_timeout():
 	self.is_invulnerable = false
 	
-#func check_contact():
-#	print("oi")
-#	if $ContactCooldown.time_left <= 0:
-#		for area in $CollisionShape2D.get_overlapping_areas():
-#			if area.is_in_group("buildings"):
-#				area.get_parent().fix_building()
-#				$ContactCooldown.start()
-#				break
-#
+func check_contact_to_fix():
+	if $FixCooldown.time_left <= 0:
+		for area in $Area2D.get_overlapping_areas():
+			if area.is_in_group("fixarea"):
+				if area.get_parent().fix_building():
+					$FixCooldown.start()
+					# Change animation
+					$Sprite/AnimationPlayer.current_animation = "Attack_Upward"
+					$Sprite/AnimationPlayer.play()
+					break
+				
+func check_contact_to_interact():
+	for area in $Area2D.get_overlapping_areas():
+		if area.is_in_group("interactarea"):
+			area.get_parent().interact()
+			break
+
 
 
