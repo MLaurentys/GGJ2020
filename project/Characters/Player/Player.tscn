@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Characters/BaseCharacter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -6,6 +6,9 @@
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32.1495, 31.676 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 33.7674, 33.9408 )
 
 [node name="Player" groups=[
 "player",
@@ -31,9 +34,11 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
-[node name="ContactCooldown" type="Timer" parent="." index="5"]
-process_mode = 0
-wait_time = 0.1
-one_shot = true
+[node name="AttackOrigin" type="Position2D" parent="." index="5"]
+
+[node name="Area2D" type="Area2D" parent="." index="6"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource( 2 )
 [connection signal="timeout" from="DashTimer" to="." method="stop_dash"]
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_InvulnerabilityTimer_timeout"]
