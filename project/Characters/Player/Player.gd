@@ -147,9 +147,7 @@ func _on_InvulnerabilityTimer_timeout():
 func check_contact():
 	if $ContactCooldown.time_left <= 0:
 		for area in $Area2D.get_overlapping_areas():
-			print("hello")
-			if area.get_parent().is_in_group("buildings"):
-				print("hi")
+			if area.is_in_group("fixarea"):
 				area.get_parent().fix_building()
 				$ContactCooldown.start()
 				break
