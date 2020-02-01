@@ -11,7 +11,7 @@ onready var locator = Locator.new(get_tree())
 #warning-ignore:unused_class_variable
 onready var player = locator.find_entity("player")
 
-#signal die
+signal die
 
 var attacking = false
 var staggering = 0
@@ -49,19 +49,19 @@ func receive_damage(damage_amount: int, origin, attack_phase: int = 0):
 		#else:
 			#impact_sounds.get_node("Weak").get_child(randi()%2).play()
 		
-		#if self.is_dead():
-			#emit_signal('die')
-			#if self.has_node("Sprite") and $Sprite.has_method("die"):
-				#self.collision_layer = 0
-				#self.collision_mask = 0
-				#$Sprite.die()
-				#yield($Sprite, "death_ended")
-				#self.queue_free()
-			#else:
-				#self.queue_free()
-		#else:
-			#self.stop_attack()
-			#self.staggering = self.stagger_duration
+		if self.is_dead():
+			emit_signal('die')
+			if self.has_node("Sprite") and $Sprite.has_method("die"):
+				self.collision_layer = 0
+				self.collision_mask = 0
+				$Sprite.die()
+				yield($Sprite, "death_ended")
+				self.queue_free()
+			else:
+				self.queue_free()
+		else:
+			self.stop_attack()
+			self.staggering = self.stagger_duration
 
 func end_attack():
 	self.attacking = false
