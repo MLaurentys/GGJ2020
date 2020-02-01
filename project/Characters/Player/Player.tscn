@@ -30,5 +30,7 @@ one_shot = true
 [node name="InvulnerabilityTimer" type="Timer" parent="." index="4"]
 wait_time = 2.0
 one_shot = true
+
+[node name="AttackOrigin" type="Position2D" parent="." index="5"]
 [connection signal="timeout" from="DashTimer" to="." method="stop_dash"]
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_InvulnerabilityTimer_timeout"]
