@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Characters/Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Characters/Enemies/Alien.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Buildings/Hospital/Hospital.tscn" type="PackedScene" id=3]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 511.557, 334.148 )
+
+[node name="Alien" parent="." instance=ExtResource( 2 )]
+position = Vector2( 104.805, 429.374 )
+
+[node name="Alien2" parent="." instance=ExtResource( 2 )]
+position = Vector2( 134.733, 277.012 )
+
+[node name="StaticBody2D" parent="." instance=ExtResource( 3 )]
+position = Vector2( 164.474, 128.969 )
+
+[node name="StaticBody2D2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 912.115, 128.969 )

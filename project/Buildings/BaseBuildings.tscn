@@ -2,8 +2,9 @@
 
 [ext_resource path="res://Buildings/BaseBuildings.gd" type="Script" id=1]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 52.8061, 82.0136 )
+[sub_resource type="CapsuleShape2D" id=7]
+radius = 62.6721
+height = 75.3016
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 245.978
@@ -26,7 +27,8 @@ func setHealth():
 "
 
 [sub_resource type="CapsuleShape2D" id=6]
-radius = 115.412
+radius = 126.818
+height = 24.7438
 
 [node name="StaticBody2D" type="StaticBody2D" groups=[
 "buildings",
@@ -34,11 +36,16 @@ radius = 115.412
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+rotation = -1.57762
+scale = Vector2( 0.921094, 0.879184 )
+shape = SubResource( 7 )
 
-[node name="InteractionArea" type="Area2D" parent="."]
+[node name="InteractionArea" type="Area2D" parent="." groups=[
+"interactarea",
+]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2( -1.36035, 7.62939e-06 )
 shape = SubResource( 2 )
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
@@ -60,4 +67,6 @@ __meta__ = {
 ]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FixArea"]
+rotation = 1.56648
+scale = Vector2( 0.800521, 1 )
 shape = SubResource( 6 )

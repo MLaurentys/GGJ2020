@@ -1,8 +1,7 @@
 extends KinematicBody2D
 class_name BaseCharacter
 
-#signal hit(damage)
-
+signal hit(damage)
 
 const SPEED_EPSILON: float = 2e-5
 
@@ -17,9 +16,9 @@ var velocity: float = 0
 
 var block_movement : bool = false
 
-#func set_health(value):
-#  health = value
-#  emit_signal("hit", value)
+func set_health(value):
+  health = value
+  emit_signal("hit", value)
 
 func _ready():
 	self.health = max_health
@@ -58,7 +57,7 @@ func is_dead() -> bool:
 func set_direction(vector) -> void:
 	direction = vector.normalized()
 
-#func receive_damage(damage: int, origin: Vector2, attack_phase: int = 0):
-#  if not self.is_dead():
-#    health -= damage
-#    emit_signal('hit', health)
+func receive_damage(damage: int, origin: Vector2, attack_phase: int = 0):
+	if not self.is_dead():
+		health -= damage
+		emit_signal('hit', health)

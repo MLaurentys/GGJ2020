@@ -1,0 +1,21 @@
+[gd_scene format=2]
+
+[node name="ShieldBar" type="YSort"]
+
+[node name="Back_Image" type="ColorRect" parent="."]
+margin_right = 104.0
+margin_bottom = 19.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Shield" type="ColorRect" parent="."]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 102.0
+margin_bottom = 17.0
+color = Color( 0.992157, 1, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
