@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Assets/Game/Tilesets/lpc-terrains/lpc-terrains/terrain-v7.png" type="Texture" id=1]
 [ext_resource path="res://Characters/Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://HUD/minimap/minimap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://world.gd" type="Script" id=4]
+[ext_resource path="res://Characters/Enemies/WaveControler.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Game/Background/set9-example5.png" type="Texture" id=6]
 
 [sub_resource type="TileSet" id=1]
@@ -95,4 +96,6 @@ tile_data = PoolIntArray( -2424855, 3, 0, -1638413, 3, 131072, -1638412, 3, 1310
 build_mode = 1
 polygon = PoolVector2Array( 19.4177, 22.6548, 109.858, 46.4549, 106.685, 201.949, 16.2443, 206.709, 8.31097, 335.23, -77.3696, 332.057, -74.8362, 643.995, 13.2776, 659.1, 15.7952, 729.592, 35.9354, 754.767, 141.672, 754.767, 146.707, 842.881, 290.207, 847.916, 305.312, 868.056, 302.794, 936.03, 456.364, 941.065, 471.469, 958.687, 471.469, 1024.14, 562.101, 1044.28, 564.618, 1092.12, 879.311, 1099.67, 881.828, 1044.28, 1166.31, 1044.28, 1171.34, 951.135, 1478.48, 946.1, 1481, 790.012, 1576.67, 777.425, 1584.22, 669.171, 1642.12, 659.1, 1654.71, 623.855, 1838.49, 621.337, 1841.01, 560.917, 1813.32, 543.294, 1803.25, 241.189, 1687.44, 238.732, 1677.37, 122.925, 1609.4, 120.407, 1591.77, 100.267, 1581.7, -40.715, 1365.2, -55.8202, 1355.12, -204.355, 1206.59, -211.908, 1196.52, -330.232, 990.082, -337.784, 980.012, -391.881, 720.706, -394.399, 715.671, -306.285, 501.68, -303.768, 501.68, -230.759, 489.092, -210.619, 380.838, -210.619, 373.286, -200.549, 373.286, -125.022, 358.18, -109.917, 247.409, -107.4, 244.891, 33.5824, 227.268, 46.1701, 131.602, 41.135, 103.909, -467.408, 1969.4, -646.153, 2049.97, 873.224, 866.723, 1440.02, -449.949, 785.459, -21.9679, 28.5757 )
 
-[node name="CanvasLayer" parent="." instance=ExtResource( 3 )]
+[node name="WaveController" parent="." instance=ExtResource( 5 )]
+
+[node name="Minimap" parent="." instance=ExtResource( 3 )]
