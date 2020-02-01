@@ -286,7 +286,6 @@ one_shot = true
 [node name="Area2D" type="Area2D" parent="." index="6"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
-
 shape = SubResource( 17 )
 
 [node name="FixCooldown" type="Timer" parent="." index="7"]
