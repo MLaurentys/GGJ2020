@@ -11,3 +11,4 @@ func _ready():
 func fix_building():
 	if health < max_health:
 		health += 1
+		$ProgressBar.setHealth()
