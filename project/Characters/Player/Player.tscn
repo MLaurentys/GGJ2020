@@ -289,7 +289,7 @@ one_shot = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
 shape = SubResource( 17 )
 
-[node name="ContactCooldown" type="Timer" parent="." index="7"]
+[node name="FixCooldown" type="Timer" parent="." index="7"]
 process_mode = 0
 wait_time = 0.1
 one_shot = true
