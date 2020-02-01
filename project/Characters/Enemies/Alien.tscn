@@ -6,7 +6,7 @@
 [ext_resource path="res://Characters/Enemies/Tracker.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 16.9581, 17.4942 )
+extents = Vector2( 8.72605, 8.15948 )
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 16.6807, 17.4942 )

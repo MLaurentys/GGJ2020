@@ -235,7 +235,7 @@ tracks/0/keys = {
 extents = Vector2( 15.4621, 23.1487 )
 
 [sub_resource type="RectangleShape2D" id=17]
-extents = Vector2( 32.0004, 31.0779 )
+extents = Vector2( 15.37, 25.2053 )
 
 [node name="Player" groups=[
 "player",
@@ -297,10 +297,10 @@ one_shot = true
 
 [node name="AttackOrigin" type="Position2D" parent="." index="7"]
 
-
 [node name="Area2D" type="Area2D" parent="." index="8"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2( 0, -27.1768 )
 shape = SubResource( 17 )
 
 [node name="Camera2D" type="Camera2D" parent="." index="9"]
@@ -311,11 +311,5 @@ limit_right = 2000
 limit_bottom = 2000
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
-
-[node name="Area2D" type="Area2D" parent="." index="9"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
-position = Vector2( 1.52588e-05, -23.1647 )
-shape = SubResource( 17 )
 [connection signal="timeout" from="DashTimer" to="." method="stop_dash"]
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_InvulnerabilityTimer_timeout"]
