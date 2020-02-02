@@ -94,6 +94,19 @@ func change_health(damage):
 	health += damage
 	hud.change_health(health)
 	
+func play_move_animation(direction, movement, velocity):
+	if (velocity != 0):
+		if direction.x == 0 and direction.y < 0:
+			state_machine.travel("Walk_Upward")
+		elif direction.x == 0 and direction.y > 0:
+			state_machine.travel("Walk_Downward")
+		elif direction.x > 0 and direction.y == 0:
+			state_machine.travel("Walk_Rightward")
+		elif direction.x < 0 and direction.y == 0:
+			state_machine.travel("Walk_Leftward")
+	elif not attacking:
+		state_machine.travel("Rest")
+	
 func receive_damage(damage: int):
 	if damage > 0 and !self.is_invulnerable:
 		if not self.is_dead():
