@@ -93,7 +93,6 @@ func check_contact():
 		for area in $Area2D.get_overlapping_areas():
 			if area.is_in_group("player"):
 				var damage_vector: Vector2 = (area.position - self.position).normalized()
-				print("aqui neh?")
 				area.get_parent().receive_damage(self.damage, damage_vector)
 				$DamageCooldown.start()
 				break

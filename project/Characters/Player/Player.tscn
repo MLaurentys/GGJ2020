@@ -5,7 +5,6 @@
 [ext_resource path="res://Characters/Player/Player.gd" type="Script" id=3]
 [ext_resource path="res://HUD/bars/perks.tscn" type="PackedScene" id=4]
 
-
 [sub_resource type="Animation" id=1]
 resource_name = "Attack_Downward"
 length = 0.6
