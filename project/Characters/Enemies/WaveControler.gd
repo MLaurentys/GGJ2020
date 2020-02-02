@@ -1,15 +1,15 @@
 extends Node
 
 const PORTAL_THRESHOLD = 0.5
-const SPAWNER_TIME_BASE = 5
-const SPAWNER_MONSTERS_BASE = 3
-const SPAWNS_PER_WAVE = [10, 20, 30]
+const SPAWNER_TIME_BASE = 2
+const SPAWNER_MONSTERS_BASE = 1
+const SPAWNS_PER_WAVE = [5, 10, 20]
 const SPAWNER_SCN = preload("res://Characters/Enemies/Spawner.tscn")
 
 onready var new_enemies = []
 var timer_sequence = [20, 20, 120]
 ################### voltar pra 10 quando for lançar
-var intervals = [10, 10, 10]
+var intervals = [0.01, 10, 10]
 var portal_timer = [90, 30]
 
 var check_portal_life = false
@@ -66,7 +66,7 @@ func create_new_wave():
 			continue
 			
 		var sp = SPAWNER_SCN.instance()
-		sp.get_node("SpawnTimer").wait_time = SPAWNER_TIME_BASE - randi() % 2 - wave_index - 2
+		sp.get_node("SpawnTimer").wait_time = SPAWNER_TIME_BASE - randi() % 2 - wave_index
 		
 		sp.get_node("SpawnTimer").monsters_to_spawn = SPAWNER_MONSTERS_BASE + randi() % 2 + wave_index
 		

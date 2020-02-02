@@ -114,7 +114,6 @@ export(float) var period = 0.3
 
 
 var running = false
-var deviation := 0.0
 
 
 func is_within_range() -> bool:
@@ -140,7 +139,10 @@ func track():
 
 func get_new_target():
 	var spos = position
-	var buildings = get_tree().get_nodes_in_group("fixarea")
+	var bs = get_tree().get_nodes_in_group("fixarea")
+	var buildings = []
+	for b in bs:
+		buildings.append(b.get_parent())
 	var dist = player.position.distance_squared_to(spos)
 	var newt = player
 	for b in buildings:

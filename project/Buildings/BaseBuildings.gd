@@ -22,6 +22,10 @@ func get_attacked(dmg :int):
 		health = 0
 		$FixArea.remove_from_group("fixarea")
 		$Sprite.frame = 2
+		$InteractionArea.queue_free()
+		$FixArea.queue_free()
+		$CollisionShape2D.queue_free()
+		$ProgressBar.queue_free()
 		return
 	health -= dmg
 	if health < max_health/2:
