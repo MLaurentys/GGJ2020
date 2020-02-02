@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Assets/Game/Tilesets/lpc-terrains/lpc-terrains/terrain-v7.png" type="Texture" id=1]
 [ext_resource path="res://Characters/Player/Player.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Buildings/Damage/Damage.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Buildings/Speed/Speed.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Buildings/Shield/Shield.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Assets/Fonts/Matchup/MatchupPro-16.tres" type="DynamicFont" id=15]
 
 [sub_resource type="TileSet" id=1]
 0/name = "terrain-v7.png 0"
@@ -165,6 +166,7 @@ margin_left = 30.0
 margin_top = 5.0
 margin_right = 330.0
 margin_bottom = 45.0
+custom_fonts/normal_font = ExtResource( 15 )
 bbcode_text = "Be ready for the ship in 90s. You need to repair the portal!"
 text = "Be ready for the ship in 90s. You need to repair the portal!"
 script = ExtResource( 8 )
@@ -202,7 +204,8 @@ margin_left = 11.5292
 margin_top = 7.0
 margin_right = 309.529
 margin_bottom = 88.0
-custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_fonts/normal_font = ExtResource( 15 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
 meta_underlined = false
 text = "- W/A/S/D or arrow keys to move
 
@@ -228,7 +231,8 @@ margin_left = 9.05905
 margin_top = 8.41197
 margin_right = 304.059
 margin_bottom = 152.412
-custom_colors/default_color = Color( 0, 0, 0, 1 )
+custom_fonts/normal_font = ExtResource( 15 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
 text = "- The only required building is the portal
 
 - However, to stay alive, it is recommended to protect all buildings. It may be necessary to give up on some of them"

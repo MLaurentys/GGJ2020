@@ -108,6 +108,7 @@ custom_icons/checked = SubResource( 1 )
 custom_icons/unchecked = SubResource( 2 )
 custom_styles/focus = SubResource( 3 )
 custom_fonts/font = ExtResource( 1 )
+pressed = true
 text = "Enable Tutorial Insight"
 __meta__ = {
 "_edit_use_anchors_": false
