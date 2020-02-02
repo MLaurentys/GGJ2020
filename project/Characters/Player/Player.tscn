@@ -454,7 +454,7 @@ script = ExtResource( 5 )
 
 [node name="Heal" type="AudioStreamPlayer2D" parent="." index="14"]
 stream = ExtResource( 9 )
-volume_db = 11.304
+volume_db = 7.0
 script = ExtResource( 5 )
 
 [node name="Repair" type="AudioStreamPlayer2D" parent="." index="15"]

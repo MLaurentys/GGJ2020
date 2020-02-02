@@ -84,7 +84,7 @@ script = ExtResource( 12 )
 
 [node name="Effect" type="AudioStreamPlayer" parent="MarginContainer/VBoxContainer/Credits"]
 stream = ExtResource( 6 )
-volume_db = 5.306
+volume_db = 3.0
 script = ExtResource( 4 )
 
 [node name="Quit" parent="MarginContainer/VBoxContainer" instance=ExtResource( 7 )]
@@ -96,7 +96,7 @@ script = ExtResource( 10 )
 
 [node name="Effect" type="AudioStreamPlayer" parent="MarginContainer/VBoxContainer/Quit"]
 stream = ExtResource( 6 )
-volume_db = 5.306
+volume_db = 3.0
 script = ExtResource( 4 )
 
 [node name="EnableTutorial" type="CheckBox" parent="."]

@@ -21,6 +21,7 @@ func _process(_delta):
 			$Minimap.scale = Vector2(1,1)
 		else:
 			$Minimap.scale = Vector2(0.0001,0.0001)
+		$minimapToggle.play()
 
 
 
@@ -32,7 +33,6 @@ func toggle_win_screen():
 	var youwin = locator.find_entity('youwin')
 	youwin.show()
 	youwin.get_node("WinFanfare").play()
-	get_tree().paused = true
 	
 func _on_Timer_timeout():
 	toggle_win_screen()

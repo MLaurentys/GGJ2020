@@ -50,7 +50,6 @@ func toggle_game_over_screen():
 	gameover.show()
 	sepia.show()
 	gameover.get_node("DefeatFanfare").play()
-	get_tree().paused = true
 	
 func get_new_enemies():
 	var ne = new_enemies
