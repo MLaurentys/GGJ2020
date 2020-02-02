@@ -49,7 +49,6 @@ func _ready():
 	hud = locator.find_entity("HUD")
 	$DashCooldown.wait_time = dash_cooldown
 	state_machine = $AnimationTree.get("parameters/playback")
-	change_health(-10)
 
 func _physics_process(delta):
 	if not attacking and not dashing:

@@ -7,7 +7,7 @@ onready var locator = Locator.new(get_tree())
 onready var player = locator.find_entity("player")
 
 func _ready():
-	self.health= max_health/2.0
+	self.health = max_health
 	$ProgressBar.setHealth()
 	
 func fix_building():
