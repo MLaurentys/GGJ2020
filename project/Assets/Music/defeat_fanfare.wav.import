@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/defeat_fanfare.wav-2f6466123620ed7695b77ac7e91ba18b.sample"
+
+[deps]
+
+source_file="res://Assets/Music/defeat_fanfare.wav"
+dest_files=[ "res://.import/defeat_fanfare.wav-2f6466123620ed7695b77ac7e91ba18b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

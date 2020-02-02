@@ -72,3 +72,6 @@ __meta__ = {
 rotation = 1.56648
 scale = Vector2( 0.800521, 1 )
 shape = SubResource( 6 )
+
+[node name="Sprite" type="Sprite" parent="."]
+hframes = 3
