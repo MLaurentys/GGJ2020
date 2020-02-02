@@ -116,7 +116,7 @@ func change_health(amt):
 	health += amt
 	hud.change_health(health)
 	
-func play_move_animation(direction, movement, velocity):
+func play_move_animation(direction, velocity):
 	if (velocity != 0):
 		if direction.x == 0 and direction.y < 0:
 			state_machine.travel("Walk_Upward")

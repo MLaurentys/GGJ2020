@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Characters/BaseCharacter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Game/Enemy/spider07.png" type="Texture" id=2]
@@ -12,9 +12,10 @@ extents = Vector2( 8.72605, 8.15948 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 16.6807, 17.4942 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=3]
 resource_name = "attack_down"
 length = 0.4
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -28,9 +29,9 @@ tracks/0/keys = {
 "values": [ 21, 22, 23 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "attack_left"
+[sub_resource type="Animation" id=4]
 length = 0.4
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -46,7 +47,8 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=5]
 resource_name = "attack_right"
-length = 0.4
+length = 0.5
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -63,6 +65,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=6]
 resource_name = "attack_up"
 length = 0.4
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -76,9 +79,8 @@ tracks/0/keys = {
 "values": [ 1, 2, 3 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 resource_name = "die"
-length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -86,14 +88,13 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"times": PoolRealArray( 0, 0.1, 0.3, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 40, 41, 42, 43 ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "idle"
+[sub_resource type="Animation" id=8]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -108,7 +109,7 @@ tracks/0/keys = {
 "values": [ 20 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=9]
 resource_name = "walk_down"
 length = 0.6
 loop = true
@@ -125,7 +126,7 @@ tracks/0/keys = {
 "values": [ 24, 25, 26, 27, 28, 29 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=10]
 resource_name = "walk_left"
 length = 0.6
 loop = true
@@ -142,7 +143,7 @@ tracks/0/keys = {
 "values": [ 14, 15, 16, 17, 18, 19 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=11]
 resource_name = "walk_right"
 length = 0.6
 loop = true
@@ -159,8 +160,7 @@ tracks/0/keys = {
 "values": [ 34, 35, 36, 37, 38, 39 ]
 }
 
-[sub_resource type="Animation" id=9]
-resource_name = "walk_up"
+[sub_resource type="Animation" id=12]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -176,6 +176,102 @@ tracks/0/keys = {
 "values": [ 4, 5, 6, 7, 8, 9 ]
 }
 
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "attack_down"
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "attack_left"
+
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "attack_right"
+
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "attack_up"
+
+[sub_resource type="AnimationNodeAnimation" id=17]
+animation = "die"
+
+[sub_resource type="AnimationNodeAnimation" id=18]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=19]
+animation = "walk_down"
+
+[sub_resource type="AnimationNodeAnimation" id=20]
+animation = "walk_left"
+
+[sub_resource type="AnimationNodeAnimation" id=21]
+animation = "walk_right"
+
+[sub_resource type="AnimationNodeAnimation" id=22]
+animation = "walk_up"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=27]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=28]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=29]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=34]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=35]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=36]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=37]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=38]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=39]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=40]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=41]
+
+[sub_resource type="AnimationNodeStateMachine" id=31]
+states/attack_down/node = SubResource( 13 )
+states/attack_down/position = Vector2( 95, 34 )
+states/attack_left/node = SubResource( 14 )
+states/attack_left/position = Vector2( 266, 27 )
+states/attack_right/node = SubResource( 15 )
+states/attack_right/position = Vector2( 430, 34 )
+states/attack_up/node = SubResource( 16 )
+states/attack_up/position = Vector2( 443, 98 )
+states/die/node = SubResource( 17 )
+states/die/position = Vector2( 656, 126 )
+states/idle/node = SubResource( 18 )
+states/idle/position = Vector2( 254, 119 )
+states/walk_down/node = SubResource( 19 )
+states/walk_down/position = Vector2( 417, 238 )
+states/walk_left/node = SubResource( 20 )
+states/walk_left/position = Vector2( 284, 238 )
+states/walk_right/node = SubResource( 21 )
+states/walk_right/position = Vector2( 173, 252 )
+states/walk_up/node = SubResource( 22 )
+states/walk_up/position = Vector2( 69, 192 )
+transitions = [ "idle", "attack_down", SubResource( 23 ), "idle", "attack_left", SubResource( 24 ), "idle", "attack_right", SubResource( 25 ), "idle", "attack_up", SubResource( 26 ), "attack_down", "idle", SubResource( 27 ), "attack_left", "idle", SubResource( 28 ), "attack_right", "idle", SubResource( 29 ), "attack_up", "idle", SubResource( 30 ), "walk_up", "idle", SubResource( 33 ), "walk_right", "idle", SubResource( 34 ), "walk_left", "idle", SubResource( 35 ), "walk_down", "idle", SubResource( 36 ), "idle", "walk_up", SubResource( 37 ), "idle", "walk_right", SubResource( 38 ), "idle", "walk_left", SubResource( 39 ), "idle", "walk_down", SubResource( 40 ), "idle", "die", SubResource( 41 ) ]
+start_node = "idle"
+end_node = "die"
+graph_offset = Vector2( 0, 63.992 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=32]
+
 [node name="Alien" groups=[
 "enemy",
 ] instance=ExtResource( 1 )]
@@ -189,7 +285,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0, -32 )
 vframes = 5
 hframes = 10
-frame = 37
+frame = 43
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 visible = false
@@ -224,14 +320,20 @@ wait_time = 3.0
 autostart = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
-anims/attack_down = SubResource( 7 )
-anims/attack_left = SubResource( 3 )
+anims/attack_down = SubResource( 3 )
+anims/attack_left = SubResource( 4 )
 anims/attack_right = SubResource( 5 )
 anims/attack_up = SubResource( 6 )
-anims/die = SubResource( 8 )
-anims/idle = SubResource( 4 )
-anims/walk_down = SubResource( 10 )
-anims/walk_left = SubResource( 11 )
-anims/walk_right = SubResource( 12 )
-anims/walk_up = SubResource( 9 )
+anims/die = SubResource( 7 )
+anims/idle = SubResource( 8 )
+anims/walk_down = SubResource( 9 )
+anims/walk_left = SubResource( 10 )
+anims/walk_right = SubResource( 11 )
+anims/walk_up = SubResource( 12 )
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="8"]
+tree_root = SubResource( 31 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 32 )
 [connection signal="timeout" from="GetTarget" to="." method="change_target"]

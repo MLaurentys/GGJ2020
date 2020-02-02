@@ -349,7 +349,7 @@ states/Walk_Upward/node = SubResource( 27 )
 states/Walk_Upward/position = Vector2( 572, 250.624 )
 transitions = [ "Rest", "Attack_Right", SubResource( 28 ), "Rest", "Attack_Left", SubResource( 29 ), "Rest", "Attack_Downward", SubResource( 30 ), "Rest", "Attack_Upward", SubResource( 31 ), "Attack_Right", "Rest", SubResource( 32 ), "Attack_Left", "Rest", SubResource( 33 ), "Attack_Downward", "Rest", SubResource( 34 ), "Attack_Upward", "Rest", SubResource( 35 ), "Rest", "Walk_Downward", SubResource( 36 ), "Rest", "Walk_Leftward", SubResource( 37 ), "Rest", "Walk_Rightward", SubResource( 38 ), "Rest", "Walk_Upward", SubResource( 39 ), "Walk_Downward", "Rest", SubResource( 40 ), "Walk_Leftward", "Rest", SubResource( 41 ), "Walk_Rightward", "Rest", SubResource( 42 ), "Walk_Upward", "Rest", SubResource( 43 ), "Walk_Leftward", "Attack_Left", SubResource( 44 ), "Rest", "Reconstruct", SubResource( 45 ), "Reconstruct", "Rest", SubResource( 46 ) ]
 start_node = "Rest"
-graph_offset = Vector2( 0, 172.7 )
+graph_offset = Vector2( 0, 15.884 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=48]
 
