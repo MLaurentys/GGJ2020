@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://Assets/Fonts/Matchup/MatchupPro.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Assets/Fonts/Matchup/MatchupPro-16.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scripts/Menu/PlayButton.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Music/menu_music_master.wav" type="AudioStream" id=3]
 [ext_resource path="res://play_sound.gd" type="Script" id=4]
@@ -10,6 +10,8 @@
 [ext_resource path="res://Assets/MainMenu/background.png" type="Texture" id=8]
 [ext_resource path="res://Assets/MainMenu/checkbox.png" type="Texture" id=9]
 [ext_resource path="res://Scripts/Menu/QuitButton.gd" type="Script" id=10]
+[ext_resource path="res://Assets/Fonts/Matchup/MatchupPro-48.tres" type="DynamicFont" id=11]
+[ext_resource path="res://Scripts/Menu/CreditsButton.gd" type="Script" id=12]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 9 )
@@ -20,17 +22,6 @@ atlas = ExtResource( 9 )
 region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="StyleBoxEmpty" id=3]
-
-[sub_resource type="DynamicFont" id=4]
-outline_size = 1
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 1 )
-
-[sub_resource type="DynamicFont" id=5]
-size = 48
-outline_size = 2
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 1 )
 
 [node name="MainMenu" type="Control" groups=[
 "menu",
@@ -88,6 +79,12 @@ margin_top = 53.0
 margin_right = 224.0
 margin_bottom = 102.0
 text = "Credits"
+script = ExtResource( 12 )
+
+[node name="Effect" type="AudioStreamPlayer" parent="MarginContainer/VBoxContainer/Credits"]
+stream = ExtResource( 6 )
+volume_db = 5.306
+script = ExtResource( 4 )
 
 [node name="Quit" parent="MarginContainer/VBoxContainer" instance=ExtResource( 7 )]
 margin_top = 106.0
@@ -109,7 +106,7 @@ margin_bottom = 359.0
 custom_icons/checked = SubResource( 1 )
 custom_icons/unchecked = SubResource( 2 )
 custom_styles/focus = SubResource( 3 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = ExtResource( 1 )
 text = "Enable Tutorial Insight"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -123,7 +120,7 @@ script = ExtResource( 4 )
 margin_top = 125.0
 margin_right = 1024.0
 margin_bottom = 204.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = ExtResource( 11 )
 text = "Some Big Great Name"
 align = 1
 valign = 1
@@ -131,6 +128,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="MarginContainer/VBoxContainer/Play" method="_on_Play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Credits" to="MarginContainer/VBoxContainer/Credits" method="_on_Credits_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="MarginContainer/VBoxContainer/Quit" method="_on_Quit_pressed"]
 [connection signal="button_down" from="EnableTutorial" to="EnableTutorial/Effect" method="play_sound_once"]
 [connection signal="button_up" from="EnableTutorial" to="EnableTutorial/Effect" method="play_sound_once"]
