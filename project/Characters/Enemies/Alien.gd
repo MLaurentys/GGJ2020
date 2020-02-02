@@ -6,6 +6,8 @@ export var min_attack_range : float = 0
 export var max_attack_range : float = 100
 export var stagger_duration : float = 0.0
 
+export(float) var damage = 20
+
 #onready var impact_sounds = $ImpactSounds
 onready var locator = Locator.new(get_tree())
 #warning-ignore:unused_class_variable
@@ -16,6 +18,11 @@ signal die
 var attacking = false
 var staggering = 0
 
+
+export var windup_duration = 0.5
+export var attack_duration = 1.0
+
+var dive = null
 #func _ready():
 	#var wave_manager = locator.find_entity('wave_manager')
 	#self.connect('die', wave_manager, 'count_enemy_deaths')
@@ -34,7 +41,11 @@ func _physics_process(delta: float) -> void:
 			self.direction = $Tracker.track()
 	elif self.is_dead() or self.is_staggering():
 		self.direction = Vector2()
+
 	self.check_contact()
+	
+	if self.dive != null:
+		self.direction = self.dive
 
 func _process(_delta):
 	if self.stagger_duration > 0:
@@ -68,6 +79,10 @@ func end_attack():
 
 #warning-ignore:unused_argument
 func attack(direction):
+	yield(get_tree().create_timer(self.windup_duration), "timeout")
+	self.dive = direction
+	yield(get_tree().create_timer(self.attack_duration), "timeout")
+	self.dive = null
 	self.end_attack()
 
 func stop_attack():
@@ -78,6 +93,7 @@ func check_contact():
 		for area in $Area2D.get_overlapping_areas():
 			if area.is_in_group("player"):
 				var damage_vector: Vector2 = (area.position - self.position).normalized()
+				print("aqui neh?")
 				area.get_parent().receive_damage(self.damage, damage_vector)
 				$DamageCooldown.start()
 				break

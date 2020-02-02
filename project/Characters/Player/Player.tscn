@@ -255,31 +255,31 @@ animation = "Attack_Upward"
 [sub_resource type="AnimationNodeAnimation" id=22]
 animation = "Rest"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=27]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=28]
+switch_mode = 2
+auto_advance = true
+
 [sub_resource type="AnimationNodeStateMachineTransition" id=29]
+switch_mode = 2
+auto_advance = true
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=30]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=31]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=32]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=33]
 switch_mode = 2
 auto_advance = true
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=34]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=35]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=36]
-switch_mode = 2
-auto_advance = true
-
-[sub_resource type="AnimationNodeStateMachine" id=27]
+[sub_resource type="AnimationNodeStateMachine" id=31]
 states/Attack_Downward/node = SubResource( 18 )
 states/Attack_Downward/position = Vector2( 307, 49 )
 states/Attack_Left/node = SubResource( 19 )
@@ -290,11 +290,11 @@ states/Attack_Upward/node = SubResource( 21 )
 states/Attack_Upward/position = Vector2( 589, 67 )
 states/Rest/node = SubResource( 22 )
 states/Rest/position = Vector2( 307, 201 )
-transitions = [ "Rest", "Attack_Right", SubResource( 29 ), "Rest", "Attack_Left", SubResource( 30 ), "Rest", "Attack_Downward", SubResource( 31 ), "Rest", "Attack_Upward", SubResource( 32 ), "Attack_Right", "Rest", SubResource( 33 ), "Attack_Left", "Rest", SubResource( 34 ), "Attack_Downward", "Rest", SubResource( 35 ), "Attack_Upward", "Rest", SubResource( 36 ) ]
+transitions = [ "Rest", "Attack_Right", SubResource( 23 ), "Rest", "Attack_Left", SubResource( 24 ), "Rest", "Attack_Downward", SubResource( 25 ), "Rest", "Attack_Upward", SubResource( 26 ), "Attack_Right", "Rest", SubResource( 27 ), "Attack_Left", "Rest", SubResource( 28 ), "Attack_Downward", "Rest", SubResource( 29 ), "Attack_Upward", "Rest", SubResource( 30 ) ]
 start_node = "Rest"
 graph_offset = Vector2( 0, 14.96 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=28]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=32]
 
 [node name="Player" groups=[
 "player",
@@ -356,7 +356,9 @@ one_shot = true
 
 [node name="AttackOrigin" type="Position2D" parent="." index="7"]
 
-[node name="Area2D" type="Area2D" parent="." index="8"]
+[node name="Area2D" type="Area2D" parent="." index="8" groups=[
+"player",
+]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
 position = Vector2( 0, -27.1768 )
@@ -372,9 +374,9 @@ drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="10"]
-tree_root = SubResource( 27 )
+tree_root = SubResource( 31 )
 anim_player = NodePath("../Sprite/AnimationPlayer")
 active = true
-parameters/playback = SubResource( 28 )
+parameters/playback = SubResource( 32 )
 [connection signal="timeout" from="DashTimer" to="." method="stop_dash"]
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_InvulnerabilityTimer_timeout"]
