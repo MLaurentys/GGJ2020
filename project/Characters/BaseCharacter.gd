@@ -62,8 +62,3 @@ func change_health(amt :int):
 	health += amt
 	hud.change_health(health)
 	
-func receive_damage(damage: int, _origin: Vector2, _attack_phase: int = 0):
-	if not self.is_dead():
-		change_health(-damage)
-		#health -= damage
-		emit_signal('hit', health)
