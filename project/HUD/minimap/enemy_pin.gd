@@ -1,14 +1,13 @@
-extends Node2D
+extends Pin
 
 onready var already_dead = false
-var enemy
-var pos
+var pos #(0->100, 0->100) [%]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
-func set_enemy(enmy):
-	enemy = enmy
 	
-func _process(delta):
-	pass
+func update_state():
+	var posi = ref_object.position
+	pos = [posi.x/(global.spawn_area[2] - global.spawn_area[0]),
+			 posi.y/(global.spawn_area[3] - global.spawn_area[1])]

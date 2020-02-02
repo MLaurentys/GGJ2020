@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://HUD/minimap/pins/PlayerPin.gd" type="Script" id=1]
+
+[node name="PlayerPin" type="Node"]
+script = ExtResource( 1 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 3.0
+margin_bottom = 3.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -1,4 +1,4 @@
-extends YSort
+extends Pin
 
 
 # Declare member variables here. Examples:
@@ -8,8 +8,6 @@ extends YSort
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Minimap.load_player($Player)
-	$Minimap.load_wave_controller($WaveController)
 	pass # Replace with function body.
 
 
