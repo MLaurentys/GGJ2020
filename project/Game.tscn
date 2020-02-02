@@ -80,7 +80,7 @@
 script = ExtResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 822.131, 943.382 )
+position = Vector2( 895.62, 813.106 )
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2( 570, 830 )
