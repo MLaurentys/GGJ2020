@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/confirm_repair.wav-073c1acf261df4e97cec1c8d5f17b29c.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/confirm_repair.wav"
+dest_files=[ "res://.import/confirm_repair.wav-073c1acf261df4e97cec1c8d5f17b29c.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
