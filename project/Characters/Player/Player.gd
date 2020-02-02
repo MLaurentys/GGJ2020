@@ -10,16 +10,31 @@ export(float) var damage = 20
 export(float) var dash_time = 0.15
 export(float) var dash_length = 100
 export(float) var dash_cooldown = 0.7
+export(float) var resistance = 0
 
 onready var can_dash = true
 var dash_direction: Vector2
 var dashing := false
 var dash_speed: float = dash_length / dash_time
 
-#var hud
-onready var energy = 100
-onready var attack = 100
-onready var shield = 100
+var buff_drop_rate = 10
+
+onready var move_spd_buff_time = 100
+onready var attack_buff_time = 100
+onready var shield_buff_time = 100
+
+var move_spd_buff_amount = 80
+var attack_buff_amount = 100
+var shield_buff_amount = 10
+
+onready var buffed_speed = self.max_speed + move_spd_buff_amount
+onready var normal_speed = self.max_speed
+
+onready var buffed_attack = self.damage + attack_buff_amount
+onready var normal_attack = self.damage
+
+onready var buffed_resistance = self.resistance + shield_buff_amount
+onready var normal_resistance = self.resistance
 
 var state_machine
 var look_angle: float = 0.0
@@ -32,7 +47,7 @@ func _ready():
 	$DashCooldown.wait_time = dash_cooldown
 	state_machine = $AnimationTree.get("parameters/playback")
 
-func _physics_process(_delta):
+func _physics_process(delta):
 	if not attacking and not dashing:
 		update_direction_from_input()
 
@@ -41,9 +56,10 @@ func _physics_process(_delta):
 	handle_dash_input()
 	handle_input()
 
+	update_buffs(delta)
+	
 	if dashing:
 		move_and_slide(dash_speed * dash_direction.normalized())
-
 
 #Handle Input
 func _input(event: InputEvent) -> void:
@@ -80,15 +96,15 @@ func get_closest_cardinal_angle(angle):
 	elif angle >= -3*PI/4 and angle <= -PI/4:
 		return -PI/2
 
-func change_energy(amt :int):
-	energy += amt
-	hud.change_energy(energy)
-func change_attack(amt :int):
-	attack += amt
-	hud.change_attack(attack)
-func change_shield(amt :int):
-	shield += amt
-	hud.change_shield(shield)
+func change_energy(amt):
+	move_spd_buff_time += amt
+	hud.change_energy(move_spd_buff_time)
+func change_attack(amt):
+	attack_buff_time += amt
+	hud.change_attack(attack_buff_time)
+func change_shield(amt):
+	shield_buff_time += amt
+	hud.change_shield(shield_buff_time)
 
 func change_health(damage):
 	health += damage
@@ -97,7 +113,12 @@ func change_health(damage):
 func receive_damage(damage: int):
 	if damage > 0 and !self.is_invulnerable:
 		if not self.is_dead():
-			change_health(-damage)
+			if shield_buff_time > 0:
+				var final_dmg = max(0, damage - resistance)
+				change_health(-final_dmg)
+			else:
+				change_health(-damage)
+				
 			emit_signal('hit', health)
 		self.is_invulnerable = true
 		$InvulnerabilityTimer.start()
@@ -116,6 +137,27 @@ func update_look_angle():
 	var look_vector = mouse_position - player_position
 	look_angle = look_vector.angle()
 
+func update_buffs(delta):
+	var drop_rate = -delta*buff_drop_rate
+	
+	if move_spd_buff_time > 0:
+		change_energy(drop_rate)
+		self.max_speed = self.buffed_speed
+	else:
+		self.max_speed = self.normal_speed
+		
+	if attack_buff_time > 0:
+		change_attack(drop_rate)
+		self.damage = self.buffed_attack
+	else:
+		self.damage = self.normal_attack
+		
+	if shield_buff_time > 0:
+		change_shield(drop_rate)
+		self.resistance = self.buffed_resistance
+	else:
+		self.resistance = self.normal_resistance
+	
 func blink_if_invulnerable():
 	if self.is_invulnerable:
 		self.modulate.a = 0.4
