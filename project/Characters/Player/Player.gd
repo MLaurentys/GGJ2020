@@ -31,6 +31,7 @@ func _ready():
 	hud = locator.find_entity("HUD")
 	$DashCooldown.wait_time = dash_cooldown
 	state_machine = $AnimationTree.get("parameters/playback")
+	change_health(-10)
 
 func _physics_process(_delta):
 	if not attacking and not dashing:
@@ -82,19 +83,27 @@ func get_closest_cardinal_angle(angle):
 		return -PI/2
 
 func change_energy(amt :int):
+	if(amt > 0): play_heal()
 	energy += amt
 	hud.change_energy(energy)
 func change_attack(amt :int):
+	if(amt > 0): play_heal()
 	attack += amt
 	hud.change_attack(attack)
 func change_shield(amt :int):
+	if(amt > 0): play_heal()
 	shield += amt
 	hud.change_shield(shield)
-
-func change_health(damage):
-	health += damage
+func change_health(amt):
+	if(amt > 0): play_heal()
+	health += amt
 	hud.change_health(health)
 	
+func play_heal():
+	$Heal.play_sound_once()
+
+
+
 func receive_damage(damage: int):
 	if damage > 0 and !self.is_invulnerable:
 		if not self.is_dead():
@@ -169,7 +178,7 @@ func handle_dash_input():
 			$Sprite/AnimationPlayer.current_animation = "Dash_Downward"
 			setup_dash()
 		$Sprite/AnimationPlayer.play()
-		
+		$Dash.play_sound_once()
 func setup_dash():
 	#$Sprite/SFXDash.pitch_scale = randf() + 1.0
 	#$Sprite/SFXDash.play()

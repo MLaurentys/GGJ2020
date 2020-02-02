@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Characters/BaseCharacter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Assets/Game/Player/spritesheet.png" type="Texture" id=2]
@@ -7,10 +7,12 @@
 [ext_resource path="res://play_sound_2D.gd" type="Script" id=5]
 [ext_resource path="res://Assets/SFX/player_attack.wav" type="AudioStream" id=6]
 [ext_resource path="res://Assets/SFX/player_damage.wav" type="AudioStream" id=7]
+[ext_resource path="res://Assets/SFX/player_dash.wav" type="AudioStream" id=8]
+[ext_resource path="res://Assets/SFX/player_heal.wav" type="AudioStream" id=9]
 
 [sub_resource type="Animation" id=1]
 resource_name = "Attack_Downward"
-length = 0.6
+length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
@@ -18,14 +20,14 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 63, 64, 65, 66, 67, 68 ]
 }
 
 [sub_resource type="Animation" id=2]
-length = 0.6
+length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
@@ -33,7 +35,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 54, 55, 56, 57, 58, 59 ]
@@ -41,7 +43,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=3]
 resource_name = "Attack_Right"
-length = 0.6
+length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
@@ -49,7 +51,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2, 0.25 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 72, 73, 74, 75, 76, 77 ]
@@ -57,7 +59,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=4]
 resource_name = "Attack_Upward"
-length = 0.6
+length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
@@ -65,10 +67,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.25 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 45, 46, 47, 48, 49, 50 ]
+"values": [ 47, 46, 48, 49, 50 ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -389,6 +391,16 @@ script = ExtResource( 5 )
 [node name="TakeDamage" type="AudioStreamPlayer2D" parent="." index="12"]
 stream = ExtResource( 7 )
 volume_db = 10.0
+script = ExtResource( 5 )
+
+[node name="Dash" type="AudioStreamPlayer2D" parent="." index="13"]
+stream = ExtResource( 8 )
+volume_db = 6.783
+script = ExtResource( 5 )
+
+[node name="Heal" type="AudioStreamPlayer2D" parent="." index="14"]
+stream = ExtResource( 9 )
+volume_db = 11.304
 script = ExtResource( 5 )
 [connection signal="timeout" from="DashTimer" to="." method="stop_dash"]
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_InvulnerabilityTimer_timeout"]
