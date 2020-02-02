@@ -74,4 +74,5 @@ scale = Vector2( 0.800521, 1 )
 shape = SubResource( 6 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0, -65.8611 )
 hframes = 3

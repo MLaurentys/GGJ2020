@@ -1,13 +1,20 @@
-[gd_scene load_steps=10 format=2]
+
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/Game/Tilesets/lpc-terrains/lpc-terrains/terrain-v7.png" type="Texture" id=1]
 [ext_resource path="res://Characters/Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://HUD/minimap/minimap.tscn" type="PackedScene" id=3]
 [ext_resource path="res://world.gd" type="Script" id=4]
 [ext_resource path="res://Characters/Enemies/WaveControler.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Buildings/Shield/Shield.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Buildings/Portal/Portal.tscn" type="PackedScene" id=7]
+<<<<<<< HEAD
 [ext_resource path="res://change_text.gd" type="Script" id=8]
+=======
+[ext_resource path="res://Buildings/Damage/Damage.tscn" type="PackedScene" id=8]
+>>>>>>> 43d867bbb8db9b650cf9ff51f37d091b35e56cd1
 [ext_resource path="res://Buildings/Hospital/Hospital.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Buildings/Speed/Speed.tscn" type="PackedScene" id=10]
 
 [sub_resource type="TileSet" id=1]
 0/name = "terrain-v7.png 0"
@@ -113,6 +120,7 @@ collision_mask = 1
 [node name="StaticBody2D2" parent="." instance=ExtResource( 9 )]
 position = Vector2( 1019.09, 1149.15 )
 
+<<<<<<< HEAD
 [node name="texts" type="CanvasLayer" parent="."]
 
 [node name="Instruction" type="ColorRect" parent="texts"]
@@ -146,3 +154,13 @@ wait_time = 10.0
 autostart = true
 [connection signal="timeout" from="texts/Instruction/Label/ShipArrival" to="texts/Instruction/Label" method="change_text" binds= [ "The ship arrives in 10 seconds. You need to fully repair the portal" ]]
 [connection signal="timeout" from="texts/Instruction/Label/ShipDeparture" to="texts/Instruction/Label" method="change_text" binds= [ "The ship departs in 30s. Keep the portal healthy" ]]
+=======
+[node name="Shield" parent="." instance=ExtResource( 6 )]
+position = Vector2( 1858.03, 1066.96 )
+
+[node name="Damage" parent="." instance=ExtResource( 8 )]
+position = Vector2( 1457.88, 1419.41 )
+
+[node name="Speed" parent="." instance=ExtResource( 10 )]
+position = Vector2( 933.171, 1432.66 )
+>>>>>>> 43d867bbb8db9b650cf9ff51f37d091b35e56cd1
