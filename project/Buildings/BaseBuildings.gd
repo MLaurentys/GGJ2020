@@ -20,8 +20,12 @@ func fix_building():
 func get_attacked(dmg :int):
 	if health < dmg:
 		health = 0
-		#destroy building
+		$FixArea.remove_from_group("fixarea")
+		$Sprite.frame = 2
+		return
 	health -= dmg
+	if health < max_health/2:
+		$Sprite.frame = 1
 	$ProgressBar.setHealth()
 	
 func interact():
