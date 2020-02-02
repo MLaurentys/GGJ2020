@@ -24,7 +24,7 @@ func _ready():
 	
 	$IntervalTimer.start()
 	$PortalTimer.start()
-	
+	$Interval.play()
 	var locator = Locator.new(get_tree())
 	portal = locator.find_entity("portal")
 	tileset = locator.find_entity("tileset")
@@ -58,7 +58,9 @@ func create_new_wave():
 		var x = randi() % lim_x
 		var y = randi() % lim_y
 		
-		var tile_index = tileset.get_cell(x/32, y/32)
+		var xt = x/32 - 18
+		var yt = y/32 - 26
+		var tile_index = tileset.get_cell(xt, yt)
 		
 		if tile_index == 2:
 			continue
@@ -80,11 +82,15 @@ func _on_IntervalTimer_timeout():
 	
 	wave_index += 1
 	$WaveTimer.start()
+	
+	$Interval.stop()
+	$WaveActive.play()
 
 func _on_WaveTimer_timeout():
 	$IntervalTimer.wait_time = intervals[wave_index]
 	$IntervalTimer.start()
-
+	$WaveActive.stop()
+	$Interval.play()
 
 func _on_PortalTimer_timeout():
 	if check_portal_life:

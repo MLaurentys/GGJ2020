@@ -44,9 +44,6 @@ func _physics_process(_delta):
 	if dashing:
 		move_and_slide(dash_speed * dash_direction.normalized())
 
-	if self.is_dead():
-		emit_signal("player_died")
-		get_tree().paused = true
 
 #Handle Input
 func _input(event: InputEvent) -> void:
@@ -102,11 +99,11 @@ func receive_damage(damage: int):
 		if not self.is_dead():
 			change_health(-damage)
 			emit_signal('hit', health)
-			
-		#$Sprite/SFXDamageSound.get_child(randi()%2).play()
-	
 		self.is_invulnerable = true
 		$InvulnerabilityTimer.start()
+		if(health < 0):
+			emit_signal("player_died")
+			get_tree().paused = true
 
 func update_direction_from_input():
 	self.direction = Vector2(
