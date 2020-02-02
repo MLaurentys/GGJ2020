@@ -2,4 +2,8 @@ extends Button
 
 func _on_Credits_pressed() -> void:
 	$Effect.play()
-	var error_flag = self.get_tree().change_scene("res://CreditsMenu.tscn")
+	var tree = self.get_tree()
+	var locator: Locator = Locator.new(tree)
+	var menu = locator.find_entity("menu")
+	var credits = menu.get_node("CreditsMenu")
+	credits.show()
