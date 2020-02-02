@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Assets/Game/Tilesets/lpc-terrains/lpc-terrains/terrain-v7.png" type="Texture" id=1]
 [ext_resource path="res://Characters/Player/Player.tscn" type="PackedScene" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://Buildings/Portal/Portal.tscn" type="PackedScene" id=7]
 [ext_resource path="res://change_text.gd" type="Script" id=8]
 [ext_resource path="res://Buildings/Hospital/Hospital.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Assets/Game/GameOver/pixel.png" type="Texture" id=10]
+[ext_resource path="res://HUD/GameOver.tscn" type="PackedScene" id=11]
 
 [sub_resource type="TileSet" id=1]
 0/name = "terrain-v7.png 0"
@@ -220,6 +222,28 @@ wait_time = 10.0
 one_shot = true
 autostart = true
 script = ExtResource( 6 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 4
+
+[node name="Sepia" type="TextureRect" parent="CanvasLayer" groups=[
+"sepia",
+]]
+visible = false
+material = SubResource( 3 )
+margin_right = 2828.0
+margin_bottom = 2297.0
+texture = ExtResource( 10 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameOverMenu" type="Control" parent="CanvasLayer" groups=[
+"gameover",
+] instance=ExtResource( 11 )]
+pause_mode = 2
+visible = false
 [connection signal="timeout" from="texts/Instruction/Label/ShipArrival" to="texts/Instruction/Label" method="change_text" binds= [ "The ship arrives in 10 seconds. You need to fully repair the portal" ]]
 [connection signal="timeout" from="texts/Instruction/Label/ShipDeparture" to="texts/Instruction/Label" method="change_text" binds= [ "The ship departs in 30s. Keep the portal healthy" ]]
 [connection signal="timeout" from="Insight/Timer" to="Insight/Timer" method="_on_Timer_timeout"]

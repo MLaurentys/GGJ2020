@@ -9,20 +9,15 @@
 [ext_resource path="res://play_sound.gd" type="Script" id=7]
 [ext_resource path="res://HUD/MainMenuButton.gd" type="Script" id=8]
 
-[sub_resource type="StyleBoxEmpty" id=6]
+[sub_resource type="StyleBoxEmpty" id=1]
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=2]
 size = 48
 outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 3 )
 
-[node name="GameOver" type="Label"]
-margin_right = 40.0
-margin_bottom = 14.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="GameOver" type="Node2D"]
 
 [node name="Retry" type="Button" parent="."]
 margin_left = 401.002
@@ -31,7 +26,7 @@ margin_right = 625.002
 margin_bottom = 303.473
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = SubResource( 6 )
+custom_styles/focus = SubResource( 1 )
 custom_styles/normal = ExtResource( 4 )
 custom_fonts/font = ExtResource( 1 )
 text = "Retry"
@@ -56,7 +51,7 @@ margin_right = 625.002
 margin_bottom = 364.273
 custom_styles/hover = ExtResource( 4 )
 custom_styles/pressed = ExtResource( 5 )
-custom_styles/focus = SubResource( 6 )
+custom_styles/focus = SubResource( 1 )
 custom_styles/normal = ExtResource( 4 )
 custom_fonts/font = ExtResource( 1 )
 text = "Main Menu"
@@ -74,7 +69,7 @@ margin_left = 1.89996
 margin_top = 125.0
 margin_right = 1025.9
 margin_bottom = 204.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 2 )
 text = "Game Over"
 align = 1
 valign = 1
