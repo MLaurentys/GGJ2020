@@ -4,3 +4,20 @@
 
 [node name="WaveController" type="Node"]
 script = ExtResource( 1 )
+
+[node name="WaveTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="IntervalTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="PortalTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="HealthyWarningTimer" type="Timer" parent="."]
+wait_time = 80.0
+one_shot = true
+[connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]
+[connection signal="timeout" from="IntervalTimer" to="." method="_on_IntervalTimer_timeout"]
+[connection signal="timeout" from="PortalTimer" to="." method="_on_PortalTimer_timeout"]
+[connection signal="timeout" from="HealthyWarningTimer" to="." method="_on_HealthyWarningTimer_timeout"]
