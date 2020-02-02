@@ -140,7 +140,7 @@ func track():
 
 func get_new_target():
 	var spos = position
-	var buildings = get_tree().get_nodes_in_group("buildings")
+	var buildings = get_tree().get_nodes_in_group("fixarea")
 	var dist = player.position.distance_squared_to(spos)
 	var newt = player
 	for b in buildings:
