@@ -8,7 +8,7 @@ const SPAWNER_SCN = preload("res://Characters/Enemies/Spawner.tscn")
 
 onready var new_enemies = []
 var timer_sequence = [20, 20, 120]
-###################
+################### voltar pra 10 quando for lançar
 var intervals = [1, 10, 10]
 var portal_timer = [90, 30]
 
@@ -20,7 +20,6 @@ var tileset
 func _ready():
 	$IntervalTimer.wait_time = intervals[0]
 	$PortalTimer.wait_time = portal_timer[0]
-	
 	
 	$IntervalTimer.start()
 	$PortalTimer.start()
@@ -61,11 +60,11 @@ func create_new_wave():
 		
 		sp.get_node("SpawnTimer").monsters_to_spawn = SPAWNER_MONSTERS_BASE + randi() % 2 + wave_index
 		
+		sp.position = Vector2(x, y)
 		add_child(sp)
 		spawners_spawned += 1
 	
 func _on_IntervalTimer_timeout():
-	print("lul")
 	$WaveTimer.wait_time = timer_sequence[wave_index]
 	create_new_wave()
 	

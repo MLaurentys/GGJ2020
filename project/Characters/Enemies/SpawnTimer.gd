@@ -6,6 +6,7 @@ var monsters_to_spawn
 
 func _on_SpawnTimer_timeout():
 	var monster = MONSTER_SCENE.instance()
+	monster.position = get_parent().position
 	get_parent().get_parent().add_child(monster)
 
 	monsters_to_spawn -= 1

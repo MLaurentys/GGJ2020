@@ -14,10 +14,10 @@ position = Vector2( 0, -62.5479 )
 position = Vector2( 0, -62.5479 )
 
 [node name="ProgressBar" parent="." index="2"]
-margin_left = -65.0421
-margin_top = -147.279
-margin_right = 78.9579
-margin_bottom = -133.28
+margin_left = -70.1755
+margin_top = -169.866
+margin_right = 73.8245
+margin_bottom = -155.867
 
 [node name="FixArea" parent="." index="3"]
 position = Vector2( 0, -62.5479 )
