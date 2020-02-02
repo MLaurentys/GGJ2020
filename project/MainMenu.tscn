@@ -71,7 +71,7 @@ script = ExtResource( 2 )
 
 [node name="Effect" type="AudioStreamPlayer" parent="MarginContainer/VBoxContainer/Play"]
 stream = ExtResource( 6 )
-volume_db = 5.306
+volume_db = -3.954
 script = ExtResource( 4 )
 
 [node name="Credits" parent="MarginContainer/VBoxContainer" instance=ExtResource( 7 )]
@@ -121,7 +121,7 @@ margin_top = 125.0
 margin_right = 1024.0
 margin_bottom = 204.0
 custom_fonts/font = ExtResource( 11 )
-text = "Some Big Great Name"
+text = "Keeping It Up"
 align = 1
 valign = 1
 __meta__ = {

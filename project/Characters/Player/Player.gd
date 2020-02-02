@@ -197,6 +197,7 @@ func blink_if_invulnerable():
 func handle_input():
 	if Input.is_action_pressed("fix"):
 		if self.check_contact_to_fix():
+			$Repair.play_sound_once()
 			state_machine.travel("Reconstruct")
 			
 	if Input.is_action_just_pressed("interact"):

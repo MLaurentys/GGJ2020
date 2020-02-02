@@ -26,6 +26,7 @@ func get_attacked(dmg :int):
 		$FixArea.queue_free()
 		$CollisionShape2D.queue_free()
 		$ProgressBar.queue_free()
+		$Destroy.play()
 		return
 	health -= dmg
 	if health < max_health/2:
