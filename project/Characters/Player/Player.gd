@@ -69,6 +69,7 @@ func _input(event: InputEvent) -> void:
 					state_machine.travel("Attack_Upward")
 				else:
 					state_machine.travel("Attack_Right")
+			$Attack.play_sound_once()
 
 func get_closest_cardinal_angle(angle):
 	if angle >= -PI/4 and angle <= PI/4:
@@ -97,6 +98,7 @@ func change_health(damage):
 func receive_damage(damage: int):
 	if damage > 0 and !self.is_invulnerable:
 		if not self.is_dead():
+			$TakeDamage.play_sound_once()
 			change_health(-damage)
 			emit_signal('hit', health)
 		self.is_invulnerable = true

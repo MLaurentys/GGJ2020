@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/Game/Tilesets/lpc-terrains/lpc-terrains/terrain-v7.png" type="Texture" id=1]
 [ext_resource path="res://Characters/Player/Player.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Characters/Enemies/WaveControler.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Game/Background/set9-example5.png" type="Texture" id=6]
 [ext_resource path="res://Buildings/Portal/Portal.tscn" type="PackedScene" id=7]
+[ext_resource path="res://change_text.gd" type="Script" id=8]
 [ext_resource path="res://Buildings/Hospital/Hospital.tscn" type="PackedScene" id=9]
 
 [sub_resource type="TileSet" id=1]
@@ -113,3 +114,37 @@ collision_mask = 1
 
 [node name="StaticBody2D2" parent="." instance=ExtResource( 9 )]
 position = Vector2( 1019.09, 1149.15 )
+
+[node name="texts" type="CanvasLayer" parent="."]
+
+[node name="Instruction" type="ColorRect" parent="texts"]
+margin_left = 345.531
+margin_top = 64.062
+margin_right = 695.531
+margin_bottom = 104.062
+color = Color( 0.85098, 0.666667, 0.0431373, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="RichTextLabel" parent="texts/Instruction"]
+margin_left = 30.0
+margin_top = 5.0
+margin_right = 330.0
+margin_bottom = 45.0
+bbcode_text = "Be ready for the sip in 90s. You need to repair the portal!"
+text = "Be ready for the sip in 90s. You need to repair the portal!"
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ShipArrival" type="Timer" parent="texts/Instruction/Label"]
+wait_time = 5.0
+autostart = true
+
+[node name="ShipDeparture" type="Timer" parent="texts/Instruction/Label"]
+wait_time = 10.0
+autostart = true
+[connection signal="timeout" from="texts/Instruction/Label/ShipArrival" to="texts/Instruction/Label" method="change_text" binds= [ "The ship arrives in 10 seconds. You need to fully repair the portal" ]]
+[connection signal="timeout" from="texts/Instruction/Label/ShipDeparture" to="texts/Instruction/Label" method="change_text" binds= [ "The ship departs in 30s. Keep the portal healthy" ]]
