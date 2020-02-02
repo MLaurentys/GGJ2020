@@ -78,26 +78,6 @@
 3/shapes = [  ]
 3/z_index = 0
 
-[sub_resource type="Shader" id=2]
-code = "shader_type canvas_item;
-
-uniform vec4 base : hint_color;
-
-void fragment() {
-    vec3 c = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0).rgb;
-
-    //float v = max(c.r, max(c.g, c.b));
-    float v = dot(c, vec3(0.33333, 0.33333, 0.33333));
-    v = sqrt(v);
-    //v *= v;
-    COLOR.rgb = base.rgb * v;
-
-}"
-
-[sub_resource type="ShaderMaterial" id=3]
-shader = SubResource( 2 )
-shader_param/base = Color( 0.454902, 0.454902, 0.454902, 0.313726 )
-
 [node name="World" type="YSort"]
 script = ExtResource( 4 )
 
@@ -169,36 +149,42 @@ autostart = true
 [node name="Insight" type="CanvasLayer" parent="."]
 
 [node name="Movements" type="ColorRect" parent="Insight"]
-margin_left = 6.94066
-margin_top = 278.123
-margin_right = 262.941
-margin_bottom = 372.123
+margin_left = 7.0
+margin_top = 278.0
+margin_right = 309.0
+margin_bottom = 458.0
 color = Color( 0.47451, 0.85098, 0.890196, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Insight/Movements"]
-margin_left = 11.5292
+margin_left = 12.0
 margin_top = 7.0
-margin_right = 309.529
-margin_bottom = 88.0
+margin_right = 310.0
+margin_bottom = 172.0
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 meta_underlined = false
 text = "- W/A/S/D or arrow keys to move
 
 - C to toggle minimap
 
-- SpaceBar to dash forward"
+- E to receive buffs from buildings
+
+- SpaceBar to dash forward
+
+- Left-Button to attack
+
+- Right-Button to repair buildings"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ColorRect" type="ColorRect" parent="Insight"]
-margin_left = 8.41084
-margin_top = 377.711
-margin_right = 308.411
-margin_bottom = 479.711
+margin_left = 11.2788
+margin_top = 471.636
+margin_right = 311.279
+margin_bottom = 573.636
 color = Color( 0.47451, 0.85098, 0.890196, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
