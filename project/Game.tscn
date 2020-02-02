@@ -173,11 +173,16 @@ __meta__ = {
 }
 
 [node name="ShipArrival" type="Timer" parent="texts/Instruction/Label"]
-wait_time = 5.0
+wait_time = 90.0
 autostart = true
 
 [node name="ShipDeparture" type="Timer" parent="texts/Instruction/Label"]
-wait_time = 10.0
+wait_time = 100.0
+autostart = true
+
+[node name="Completion" type="Timer" parent="texts/Instruction/Label"]
+wait_time = 130.0
+one_shot = true
 autostart = true
 
 [node name="Insight" type="CanvasLayer" parent="."]
@@ -258,4 +263,5 @@ pause_mode = 2
 visible = false
 [connection signal="timeout" from="texts/Instruction/Label/ShipArrival" to="texts/Instruction/Label" method="change_text" binds= [ "The ship arrives in 10 seconds. You need to fully repair the portal" ]]
 [connection signal="timeout" from="texts/Instruction/Label/ShipDeparture" to="texts/Instruction/Label" method="change_text" binds= [ "The ship departs in 30s. Keep the portal healthy" ]]
+[connection signal="timeout" from="texts/Instruction/Label/Completion" to="." method="_on_Completion_timeout"]
 [connection signal="timeout" from="Insight/Timer" to="Insight/Timer" method="_on_Timer_timeout"]

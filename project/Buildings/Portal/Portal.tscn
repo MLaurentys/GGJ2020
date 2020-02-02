@@ -41,6 +41,9 @@ color_ramp = SubResource( 2 )
 position = Vector2( 0, -12.4966 )
 script = ExtResource( 2 )
 
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2( 0, -27.6932 )
+
 [node name="ProgressBar" parent="." index="2"]
 margin_top = -170.0
 margin_bottom = -156.0

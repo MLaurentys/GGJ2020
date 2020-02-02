@@ -11,7 +11,11 @@ script = ExtResource( 2 )
 position = Vector2( 0, -58.0079 )
 
 [node name="InteractionArea" parent="." index="1"]
+visible = false
 position = Vector2( 0, -58.0079 )
+
+[node name="CollisionShape2D" parent="InteractionArea" index="0"]
+visible = false
 
 [node name="ProgressBar" parent="." index="2"]
 margin_top = -146.671

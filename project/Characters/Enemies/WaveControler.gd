@@ -1,15 +1,15 @@
 extends Node
 
 const PORTAL_THRESHOLD = 0.5
-const SPAWNER_TIME_BASE = 2
+const SPAWNER_TIME_BASE = 4
 const SPAWNER_MONSTERS_BASE = 2
-const SPAWNS_PER_WAVE = [3, 8, 12]
+const SPAWNS_PER_WAVE = [4, 8, 11]
 const SPAWNER_SCN = preload("res://Characters/Enemies/Spawner.tscn")
 
 onready var new_enemies = []
-var timer_sequence = [20, 20, 120]
+var timer_sequence = [30, 30, 120]
 ################### voltar pra 10 quando for lançar
-var intervals = [0.01, 10, 10]
+var intervals = [10, 25, 10]
 var portal_timer = [90, 30]
 
 var check_portal_life = false
