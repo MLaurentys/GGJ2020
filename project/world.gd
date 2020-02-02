@@ -1,6 +1,9 @@
 extends YSort
 
+var locator
 func _ready():
+	locator = Locator.new(get_tree())
+	
 	var t : Rect2 = $TileMap.get_used_rect()
 	global.spawn_area[2] =t.size.x * 32
 	global.spawn_area[3] =t.size.y * 32
@@ -24,3 +27,12 @@ func _process(_delta):
 func _on_Completion_timeout():
 	get_tree().pause()
 	pass # Replace with function body.
+	
+func toggle_win_screen():
+	var youwin = locator.find_entity('youwin')
+	youwin.show()
+	youwin.get_node("WinFanfare").play()
+	get_tree().paused = true
+	
+func _on_Timer_timeout():
+	toggle_win_screen()

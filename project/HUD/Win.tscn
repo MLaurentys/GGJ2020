@@ -1,0 +1,88 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://Assets/Fonts/Matchup/MatchupPro-32.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Assets/SFX/ui_confirm.wav" type="AudioStream" id=2]
+[ext_resource path="res://Assets/Fonts/Matchup/MatchupPro.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://GUI/NormalMenuButton.tres" type="StyleBox" id=4]
+[ext_resource path="res://GUI/PressedMenuButton.tres" type="StyleBox" id=5]
+[ext_resource path="res://HUD/RetryButton.gd" type="Script" id=6]
+[ext_resource path="res://play_sound.gd" type="Script" id=7]
+[ext_resource path="res://HUD/MainMenuButton.gd" type="Script" id=8]
+[ext_resource path="res://Assets/Music/victory_fanfare.wav" type="AudioStream" id=9]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="DynamicFont" id=2]
+size = 48
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 3 )
+
+[node name="YouWin" type="Node2D" groups=[
+"youwin",
+]]
+pause_mode = 2
+
+[node name="Retry" type="Button" parent="."]
+margin_left = 401.002
+margin_top = 254.473
+margin_right = 625.002
+margin_bottom = 303.473
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = SubResource( 1 )
+custom_styles/normal = ExtResource( 4 )
+custom_fonts/font = ExtResource( 1 )
+text = "Retry"
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="Effect" type="AudioStreamPlayer" parent="Retry"]
+stream = ExtResource( 2 )
+volume_db = 5.306
+script = ExtResource( 7 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="MainMenu" type="Button" parent="."]
+margin_left = 401.002
+margin_top = 315.273
+margin_right = 625.002
+margin_bottom = 364.273
+custom_styles/hover = ExtResource( 4 )
+custom_styles/pressed = ExtResource( 5 )
+custom_styles/focus = SubResource( 1 )
+custom_styles/normal = ExtResource( 4 )
+custom_fonts/font = ExtResource( 1 )
+text = "Main Menu"
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="Effect" type="AudioStreamPlayer" parent="MainMenu"]
+script = ExtResource( 7 )
+
+[node name="GameOverText" type="Label" parent="."]
+margin_left = 1.89996
+margin_top = 125.0
+margin_right = 1025.9
+margin_bottom = 204.0
+custom_fonts/font = SubResource( 2 )
+text = "YOU WIN!!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="WinFanfare" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+[connection signal="pressed" from="Retry" to="Retry" method="_on_Retry_pressed"]
+[connection signal="pressed" from="MainMenu" to="MainMenu" method="_on_MainMenu_pressed"]

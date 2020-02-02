@@ -106,8 +106,8 @@ func _on_WaveTimer_timeout():
 
 func _on_PortalTimer_timeout():
 	if check_portal_life:
-		#TODO: you win
-		pass
+#		toggle_win_screen()
+		return
 	
 	$PortalTimer.wait_time = portal_timer[1]
 	check_portal_life = true
