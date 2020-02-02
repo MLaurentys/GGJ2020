@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Assets/Game/Tilesets/lpc-terrains/lpc-terrains/terrain-v7.png" type="Texture" id=1]
 [ext_resource path="res://Characters/Player/Player.tscn" type="PackedScene" id=2]
@@ -11,6 +11,9 @@
 [ext_resource path="res://Buildings/Hospital/Hospital.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Assets/Game/GameOver/pixel.png" type="Texture" id=10]
 [ext_resource path="res://HUD/GameOver.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Buildings/Damage/Damage.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Buildings/Speed/Speed.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Buildings/Shield/Shield.tscn" type="PackedScene" id=14]
 
 [sub_resource type="TileSet" id=1]
 0/name = "terrain-v7.png 0"
@@ -104,7 +107,7 @@ shader_param/base = Color( 0.454902, 0.454902, 0.454902, 0.313726 )
 script = ExtResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1015.45, 725.227 )
+position = Vector2( 1525.3, 832.47 )
 
 [node name="TileMap" type="TileMap" parent="." groups=[
 "tileset",
@@ -128,13 +131,22 @@ polygon = PoolVector2Array( 19.4177, 22.6548, 109.858, 46.4549, 106.685, 201.949
 [node name="Minimap" parent="." instance=ExtResource( 3 )]
 layer = 0
 
-[node name="StaticBody2D" parent="." instance=ExtResource( 7 )]
-position = Vector2( 1427.11, 709.975 )
+[node name="Portal" parent="." instance=ExtResource( 7 )]
+position = Vector2( 1520, 735 )
 collision_layer = 1
 collision_mask = 1
 
-[node name="StaticBody2D2" parent="." instance=ExtResource( 9 )]
-position = Vector2( 1019.09, 1149.15 )
+[node name="Hospital" parent="." instance=ExtResource( 9 )]
+position = Vector2( 1020, 1050 )
+
+[node name="Damage" parent="." instance=ExtResource( 12 )]
+position = Vector2( 1887, 1149 )
+
+[node name="Shield" parent="." instance=ExtResource( 14 )]
+position = Vector2( 1648, 1608 )
+
+[node name="Speed" parent="." instance=ExtResource( 13 )]
+position = Vector2( 1064, 1535 )
 
 [node name="texts" type="CanvasLayer" parent="."]
 
