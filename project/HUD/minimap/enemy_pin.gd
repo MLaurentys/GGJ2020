@@ -13,6 +13,7 @@ func update_state():
 	if(ref_object == null or ref_object.toDel == true and not dying):
 		ref_object.state_machine.travel("die")
 		$Timer.start()
+		$Death.play()
 		dying = true
 		pass	
 	var posi = ref_object.position
@@ -23,5 +24,6 @@ func update_state():
 
 func _on_Timer_timeout():
 	ref_object.queue_free()
+	
 	queue_free()
 	pass # Replace with function body.

@@ -155,6 +155,7 @@ func receive_damage(damage: int):
 			var sepia = locator.find_entity('sepia')
 			gameover.show()
 			sepia.show()
+			gameover.get_node("DefeatFanfare").play()
 			get_tree().paused = true
 
 func update_direction_from_input():
@@ -198,6 +199,7 @@ func blink_if_invulnerable():
 func handle_input():
 	if Input.is_action_pressed("fix"):
 		if self.check_contact_to_fix():
+			$Repair.play_sound_once()
 			state_machine.travel("Reconstruct")
 			
 	if Input.is_action_just_pressed("interact"):

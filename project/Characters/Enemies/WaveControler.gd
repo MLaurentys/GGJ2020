@@ -49,6 +49,7 @@ func toggle_game_over_screen():
 	var sepia = locator.find_entity('sepia')
 	gameover.show()
 	sepia.show()
+	gameover.get_node("DefeatFanfare").play()
 	get_tree().paused = true
 	
 func get_new_enemies():

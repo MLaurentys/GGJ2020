@@ -14,9 +14,9 @@ __meta__ = {
 }
 
 [node name="Low_Life" type="ColorRect" parent="."]
-margin_right = 3.0
-margin_bottom = 3.0
-color = Color( 0.211765, 0.298039, 0.368627, 1 )
+margin_right = 5.0
+margin_bottom = 5.0
+color = Color( 0.247059, 0.843137, 0.619608, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
