@@ -9,7 +9,7 @@ const SPAWNER_SCN = preload("res://Characters/Enemies/Spawner.tscn")
 onready var new_enemies = []
 var timer_sequence = [20, 20, 120]
 ################### voltar pra 10 quando for lançar
-var intervals = [0.01, 10, 10]
+var intervals = [10, 10, 10]
 var portal_timer = [90, 30]
 
 var check_portal_life = false
