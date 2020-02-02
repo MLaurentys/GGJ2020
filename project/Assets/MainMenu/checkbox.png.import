@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/playbutton.png-382bbeb626719e6818f03fdd1168ad6d.stex"
+path="res://.import/checkbox.png-05cc5e90149dbb95d0e0ebd941515d0f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/MainMenu/playbutton.png"
-dest_files=[ "res://.import/playbutton.png-382bbeb626719e6818f03fdd1168ad6d.stex" ]
+source_file="res://Assets/MainMenu/checkbox.png"
+dest_files=[ "res://.import/checkbox.png-05cc5e90149dbb95d0e0ebd941515d0f.stex" ]
 
 [params]
 
