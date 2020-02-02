@@ -300,9 +300,9 @@ graph_offset = Vector2( 0, 14.96 )
 "player",
 ] instance=ExtResource( 1 )]
 position = Vector2( 0.926575, 3.8147e-06 )
+collision_mask = 22
 script = ExtResource( 3 )
 max_speed = 256.0
-max_health = 100
 
 [node name="Perks" parent="." index="0" instance=ExtResource( 4 )]
 position = Vector2( -25, 2.106 )

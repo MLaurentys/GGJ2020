@@ -7,8 +7,8 @@ const SPEED_EPSILON: float = 2e-5
 
 #export(float) var damage = 20
 export(float) var acceleration := 100.0
-export(float) var max_speed: float
-export(int) var max_health: int
+export(float) var max_speed := 80
+export(int) var max_health := 100
 
 var hud
 var health: int

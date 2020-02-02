@@ -4,7 +4,7 @@ extends BaseCharacter
 #warning-ignore:unused_class_variable
 export var min_attack_range : float = 0
 export var max_attack_range : float = 100
-export var stagger_duration : float = 0.0
+export var stagger_duration : float = 0.5
 
 export(float) var damage = 20
 
