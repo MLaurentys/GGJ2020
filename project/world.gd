@@ -8,7 +8,7 @@ extends YSort
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Mnimap.load_player($Player)
+	$Minimap.load_player($Player)
 	$Minimap.load_wave_controller($WaveController)
 	pass # Replace with function body.
 
