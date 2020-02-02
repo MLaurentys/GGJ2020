@@ -6,10 +6,11 @@ const SPAWNER_MONSTERS_BASE = 2
 const SPAWNS_PER_WAVE = [3, 8, 12]
 const SPAWNER_SCN = preload("res://Characters/Enemies/Spawner.tscn")
 
+var locator
 onready var new_enemies = []
 var timer_sequence = [20, 20, 120]
 ################### voltar pra 10 quando for lançar
-var intervals = [0.01, 10, 10]
+var intervals = [1, 10, 10]
 var portal_timer = [90, 30]
 
 var check_portal_life = false
@@ -25,20 +26,30 @@ func _ready():
 	$IntervalTimer.start()
 	$PortalTimer.start()
 	$Interval.play()
-	var locator = Locator.new(get_tree())
+	locator = Locator.new(get_tree())
 	portal = locator.find_entity("portal")
 	tileset = locator.find_entity("tileset")
 
 func _physics_process(_delta):
+	if portal.health <= 0:
+		toggle_game_over_screen()
+		
 	if toClear:
 		toClear = false
 		new_enemies = []
+		
 	if not check_portal_life:
-		pass
+		return
 	
 	if portal.health < PORTAL_THRESHOLD*portal.max_health:
-		#TODO: game over
-		pass
+		toggle_game_over_screen()
+	
+func toggle_game_over_screen():
+	var gameover = locator.find_entity('gameover')
+	var sepia = locator.find_entity('sepia')
+	gameover.show()
+	sepia.show()
+	get_tree().paused = true
 	
 func get_new_enemies():
 	var ne = new_enemies
