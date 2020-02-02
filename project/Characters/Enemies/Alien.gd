@@ -16,7 +16,7 @@ onready var player = locator.find_entity("player")
 signal die
 
 var target
-
+var state_machine
 var attacking = false
 var staggering = 0
 var toDel = false
@@ -40,6 +40,14 @@ func _physics_process(delta: float) -> void:
 	self.staggering = max(0, self.staggering - delta)
 	if not self.is_dead() and not self.attacking and not self.is_staggering():
 		if is_within_range():
+			if direction.x == 0 and direction.y < 0:
+				state_machine.travel("attack_up")
+			elif direction.x == 0 and direction.y > 0:
+				state_machine.travel("attack_down")
+			elif direction.x > 0 and direction.y == 0:
+				state_machine.travel("attack_right")
+			elif direction.x < 0 and direction.y == 0:	
+				state_machine.travel("attack_left")
 			self.attacking = true
 			attack()
 	elif self.is_dead() or self.is_staggering():
@@ -49,11 +57,29 @@ func _physics_process(delta: float) -> void:
 	
 	if self.dive != null:
 		self.direction = self.dive
+		
+	state_machine = $AnimationTree.get("parameters/playback")
 
 func _process(_delta):
+	if(toDel):
+		pass
 	track()
 	if self.stagger_duration > 0:
 		$HealthBar.modulate = Color(1, 1, 1, 1) * (1 + 5 * self.staggering / self.stagger_duration)
+
+func play_move_animation(direction, velocity):
+	if (velocity != 0) and not self.attacking:
+		if direction.x == 0 and direction.y < 0:
+			state_machine.travel("walk_up")
+		elif direction.x == 0 and direction.y > 0:
+			state_machine.travel("walk_down")
+		elif direction.x > 0 and direction.y == 0:
+			state_machine.travel("walk_right")
+		elif direction.x < 0 and direction.y == 0:
+			state_machine.travel("walk_left")
+	elif not self.attacking:
+		state_machine.travel("Rest")
+		
 
 func receive_damage(damage_amount: int):
 	if !self.is_dead():

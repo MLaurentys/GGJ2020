@@ -32,10 +32,9 @@ func _physics_process(_delta) -> void:
 		self.direction = remaining_movement
 		self.velocity = remaining_movement.length()
 		deaccelerate()
-		if self.is_in_group("player"):
-			self.play_move_animation(direction, movement, velocity)
+		self.play_move_animation(direction, velocity)
 
-func play_move_animation(direction, movement, velocity):
+func play_move_animation(direction, velocity):
 	pass
 	
 func accelerate() -> void:

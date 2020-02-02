@@ -19,6 +19,8 @@ var dash_speed: float = dash_length / dash_time
 
 var buff_drop_rate = 10
 
+var locator
+
 onready var move_spd_buff_time = 100
 onready var attack_buff_time = 100
 onready var shield_buff_time = 100
@@ -43,7 +45,7 @@ var resting := true
 onready var is_invulnerable = false
 
 func _ready():
-	var locator = Locator.new(get_tree())
+	locator = Locator.new(get_tree())
 	hud = locator.find_entity("HUD")
 	$DashCooldown.wait_time = dash_cooldown
 	state_machine = $AnimationTree.get("parameters/playback")
@@ -116,7 +118,7 @@ func change_health(amt):
 	health += amt
 	hud.change_health(health)
 	
-func play_move_animation(direction, movement, velocity):
+func play_move_animation(direction, velocity):
 	if (velocity != 0):
 		if direction.x == 0 and direction.y < 0:
 			state_machine.travel("Walk_Upward")
@@ -149,8 +151,10 @@ func receive_damage(damage: int):
 		self.is_invulnerable = true
 		$InvulnerabilityTimer.start()
 		if(health < 0):
-			emit_signal("player_died")
-			get_tree().paused = true
+			var gameover = locator.find_entity('gameover')
+			var sepia = locator.find_entity('sepia')
+			gameover.show()
+			sepia.show()
 
 func update_direction_from_input():
 	self.direction = Vector2(
