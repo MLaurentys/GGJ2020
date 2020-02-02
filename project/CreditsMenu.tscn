@@ -8,7 +8,7 @@
 [ext_resource path="res://GUI/MenuButton.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/MainMenu/background.png" type="Texture" id=8]
 
-[node name="MainMenu" type="Control" groups=[
+[node name="CreditsMenu" type="Control" groups=[
 "menu",
 ]]
 anchor_right = 1.0

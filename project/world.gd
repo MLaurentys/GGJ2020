@@ -17,7 +17,7 @@ func _ready():
 
 func _process(_delta):
 	if Input.is_action_just_pressed("toggle_minimap"):
-		if $Minimap.scale == Vector2(0,0):
+		if $Minimap.scale == Vector2(0.0001,0.0001):
 			$Minimap.scale = Vector2(1,1)
 		else:
 			$Minimap.scale = Vector2(0.0001,0.0001)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Assets/Fonts/Matchup/MatchupPro-16.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scripts/Menu/PlayButton.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Scripts/Menu/QuitButton.gd" type="Script" id=10]
 [ext_resource path="res://Assets/Fonts/Matchup/MatchupPro-48.tres" type="DynamicFont" id=11]
 [ext_resource path="res://Scripts/Menu/CreditsButton.gd" type="Script" id=12]
+[ext_resource path="res://CreditsMenu.tscn" type="PackedScene" id=13]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 9 )
@@ -107,6 +108,7 @@ custom_icons/checked = SubResource( 1 )
 custom_icons/unchecked = SubResource( 2 )
 custom_styles/focus = SubResource( 3 )
 custom_fonts/font = ExtResource( 1 )
+pressed = true
 text = "Enable Tutorial Insight"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -127,6 +129,9 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="CreditsMenu" parent="." instance=ExtResource( 13 )]
+visible = false
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="MarginContainer/VBoxContainer/Play" method="_on_Play_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Credits" to="MarginContainer/VBoxContainer/Credits" method="_on_Credits_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="MarginContainer/VBoxContainer/Quit" method="_on_Quit_pressed"]
