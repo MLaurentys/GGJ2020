@@ -150,11 +150,12 @@ func receive_damage(damage: int):
 			emit_signal('hit', health)
 		self.is_invulnerable = true
 		$InvulnerabilityTimer.start()
-		if(health < 0):
+		if(health <= 0):
 			var gameover = locator.find_entity('gameover')
 			var sepia = locator.find_entity('sepia')
 			gameover.show()
 			sepia.show()
+			get_tree().paused = true
 
 func update_direction_from_input():
 	self.direction = Vector2(
