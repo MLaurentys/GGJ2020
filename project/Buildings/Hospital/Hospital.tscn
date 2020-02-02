@@ -7,6 +7,23 @@
 [node name="StaticBody2D" instance=ExtResource( 1 )]
 script = ExtResource( 3 )
 
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2( 0, -62.5479 )
+
+[node name="InteractionArea" parent="." index="1"]
+position = Vector2( 0, -62.5479 )
+
+[node name="ProgressBar" parent="." index="2"]
+margin_left = -65.0421
+margin_top = -147.279
+margin_right = 78.9579
+margin_bottom = -133.28
+
+[node name="FixArea" parent="." index="3"]
+position = Vector2( 0, -62.5479 )
+
 [node name="Sprite" type="Sprite" parent="." index="4"]
+position = Vector2( 0, -19.9933 )
 texture = ExtResource( 2 )
+offset = Vector2( 0, -64 )
 hframes = 3

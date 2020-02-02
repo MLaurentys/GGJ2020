@@ -23,13 +23,16 @@ script = ExtResource( 3 )
 modulate = Color( 1, 0, 0, 1 )
 scale = Vector2( 0.52, 0.52 )
 texture = ExtResource( 2 )
+offset = Vector2( 0, -32 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+position = Vector2( 0, -16.6378 )
 shape = SubResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="." index="2" groups=[
 "enemy",
 ]]
+position = Vector2( 0, -16.6378 )
 
 [node name="HitBox" type="CollisionShape2D" parent="Area2D" index="0"]
 shape = SubResource( 2 )
@@ -42,5 +45,6 @@ wait_time = 2.0
 one_shot = true
 
 [node name="HealthBar" parent="." index="5" instance=ExtResource( 5 )]
-position = Vector2( -26.1978, 20.5282 )
+position = Vector2( -26.1978, 3.89038 )
 scale = Vector2( 0.52, 0.52 )
+z_index = 20

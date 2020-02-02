@@ -29,7 +29,6 @@ onready var is_invulnerable = false
 func _ready():
 	var locator = Locator.new(get_tree())
 	hud = locator.find_entity("HUD")
-	#var player = locator.find_entity("player")
 	$DashCooldown.wait_time = dash_cooldown
 	state_machine = $AnimationTree.get("parameters/playback")
 
