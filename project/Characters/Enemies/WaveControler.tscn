@@ -22,9 +22,11 @@ one_shot = true
 
 [node name="WaveActive" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+volume_db = -5.0
 
 [node name="Interval" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
+volume_db = -5.0
 [connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]
 [connection signal="timeout" from="IntervalTimer" to="." method="_on_IntervalTimer_timeout"]
 [connection signal="timeout" from="PortalTimer" to="." method="_on_PortalTimer_timeout"]
