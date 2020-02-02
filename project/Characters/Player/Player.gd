@@ -24,6 +24,7 @@ onready var shield = 100
 var state_machine
 var look_angle: float = 0.0
 var attacking := false
+var resting := true
 onready var is_invulnerable = false
 
 func _ready():
@@ -109,8 +110,10 @@ func play_move_animation(direction, movement, velocity):
 			state_machine.travel("Walk_Rightward")
 		elif direction.x < 0 and direction.y == 0:
 			state_machine.travel("Walk_Leftward")
-	elif not attacking:
+		resting = false
+	elif not attacking and not resting:
 		state_machine.travel("Rest")
+		resting = true
 	
 func play_heal():
 	$Heal.play_sound_once()
@@ -146,9 +149,14 @@ func blink_if_invulnerable():
 
 func handle_input():
 	if Input.is_action_pressed("fix"):
-		self.check_contact_to_fix()
+		if self.check_contact_to_fix():
+			state_machine.travel("Reconstruct")
+			
 	if Input.is_action_just_pressed("interact"):
 		self.check_contact_to_interact()
+	
+	if Input.is_action_just_released("fix"):
+		state_machine.travel("Rest")
 		
 func handle_dash_input():
 	if Input.is_action_just_pressed("ui_select") and not attacking and can_dash:
@@ -221,9 +229,8 @@ func check_contact_to_fix():
 			if area.is_in_group("fixarea"):
 				if area.get_parent().fix_building():
 					$FixCooldown.start()
-					$Sprite/AnimationPlayer.current_animation = "Reconstruct"
-					$Sprite/AnimationPlayer.play()
-					break
+					return true
+	return false
 				
 func check_contact_to_interact():
 	for area in $Area2D.get_overlapping_areas():
