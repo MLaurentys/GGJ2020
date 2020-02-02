@@ -78,6 +78,26 @@
 3/shapes = [  ]
 3/z_index = 0
 
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+uniform vec4 base : hint_color;
+
+void fragment() {
+    vec3 c = textureLod(SCREEN_TEXTURE, SCREEN_UV, 0.0).rgb;
+
+    //float v = max(c.r, max(c.g, c.b));
+    float v = dot(c, vec3(0.33333, 0.33333, 0.33333));
+    v = sqrt(v);
+    //v *= v;
+    COLOR.rgb = base.rgb * v;
+
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+shader_param/base = Color( 0.454902, 0.454902, 0.454902, 0.313726 )
+
 [node name="World" type="YSort"]
 script = ExtResource( 4 )
 
