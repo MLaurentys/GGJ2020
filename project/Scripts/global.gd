@@ -1,4 +1,5 @@
 extends Node
 
 var play_tutorial = false
-var spawn_area = [-1000, 1000, 1000, -1000] #top-left, bottom-right
+var spawn_area = [-736, -1216, 2240, 1440] #top-left, bottom-right
+var minimap_area = [0,0,320,265]

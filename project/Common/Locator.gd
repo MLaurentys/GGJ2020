@@ -4,8 +4,8 @@ class_name Locator
 
 var tree: SceneTree
 
-func _init(tree: SceneTree):
-	self.tree = tree
+func _init(tr: SceneTree):
+	self.tree = tr
 
 func has_entity(entity_name: String):
 	return len(self.tree.get_nodes_in_group(entity_name)) != 0

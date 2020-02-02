@@ -10,6 +10,7 @@ extends YSort
 func _ready():
 	$Minimap.load_player($Player)
 	$Minimap.load_wave_controller($WaveController)
+	print($TileMap.get_used_rect())
 	pass # Replace with function body.
 
 

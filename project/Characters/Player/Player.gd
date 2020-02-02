@@ -94,9 +94,9 @@ func change_shield(amt :int):
 	shield += amt
 	hud.change_shield(shield)
 	
-func receive_damage(damage: int, vector: Vector2, attack_phase: int = 0):
+func receive_damage(dmg: int, vector: Vector2, attack_phase: int = 0):
 	if damage > 0 and !self.is_invulnerable:
-		.receive_damage(damage, vector, attack_phase)
+		.receive_damage(dmg, vector, attack_phase)
 		#$Sprite/SFXDamageSound.get_child(randi()%2).play()
 	
 		self.is_invulnerable = true
@@ -206,5 +206,5 @@ func check_contact_to_interact():
 			area.get_parent().interact()
 			break
 
-func _on_Area2D_body_entered(body):
+func _on_Area2D_body_entered(_body):
 	pass # Replace with function body.

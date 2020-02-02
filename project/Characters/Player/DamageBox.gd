@@ -3,8 +3,8 @@ extends Node2D
 export(float) var cooldown := 0.2
 var player
 
-func init(player):
-	self.player = player
+func init(plyer):
+	player = plyer
 	
 func _ready() -> void:
 	yield(get_tree(), "idle_frame")
