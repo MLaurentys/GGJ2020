@@ -7,5 +7,18 @@
 [node name="Shield" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2( 0, -58.0079 )
+
+[node name="InteractionArea" parent="." index="1"]
+position = Vector2( 0, -58.0079 )
+
+[node name="ProgressBar" parent="." index="2"]
+margin_top = -146.671
+margin_bottom = -132.671
+
+[node name="FixArea" parent="." index="3"]
+position = Vector2( 0, -58.0079 )
+
 [node name="Sprite" parent="." index="4"]
 texture = ExtResource( 3 )
