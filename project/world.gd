@@ -16,7 +16,7 @@ func _ready():
 	print(t)
 	pass # Replace with function body.
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("toggle_minimap"):
 		if $Minimap.scale == Vector2(0,0):
 			$Minimap.scale = Vector2(1,1)
