@@ -18,5 +18,4 @@ func fix_building():
 	return false
 		
 func interact():
-	print("Interagiu")
 	pass

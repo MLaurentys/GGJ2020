@@ -1,8 +1,12 @@
 extends BaseCharacter
 class_name Player
 
+signal player_attack
+signal player_died
+
 const DAMAGE_BOX_SCN = preload("res://Characters/Player/DamageBox.tscn")
 
+export(float) var damage = 20
 export(float) var dash_time = 0.15
 export(float) var dash_length = 100
 export(float) var dash_cooldown = 0.7
@@ -12,7 +16,7 @@ var dash_direction: Vector2
 var dashing := false
 var dash_speed: float = dash_length / dash_time
 
-var hud
+#var hud
 onready var energy = 100
 onready var attack = 100
 onready var shield = 100
@@ -42,7 +46,7 @@ func _physics_process(_delta):
 		move_and_slide(dash_speed * dash_direction.normalized())
 
 	if self.is_dead():
-#    emit_signal("player_died")
+		emit_signal("player_died")
 		get_tree().paused = true
 
 #Handle Input
@@ -50,13 +54,12 @@ func _input(event: InputEvent) -> void:
 	# Left mouse button is clicked
 	if event is InputEventMouseButton and event.button_index == 1 and $Sprite/AnimationPlayer.current_animation != "Reconstruct":
 		if event.pressed and not dashing:
-	#      emit_signal("player_attack")
+			emit_signal("player_attack")
 			attacking = true
 			direction = Vector2(0, 0)
 			var damage_box = DAMAGE_BOX_SCN.instance()
 			damage_box.init(self)
 			var attack_angle = get_closest_cardinal_angle(self.look_angle)
-			print(attack_angle)
 			var attack_offset = Vector2(50,0).rotated(attack_angle)
 			damage_box.position = self.position + $AttackOrigin.position + attack_offset
 			get_parent().add_child(damage_box)
@@ -81,9 +84,6 @@ func get_closest_cardinal_angle(angle):
 	elif angle >= -3*PI/4 and angle <= -PI/4:
 		return -PI/2
 
-func change_health(amt :int):
-	health += amt
-	hud.change_health(health)
 func change_energy(amt :int):
 	energy += amt
 	hud.change_energy(energy)
@@ -93,13 +93,14 @@ func change_attack(amt :int):
 func change_shield(amt :int):
 	shield += amt
 	hud.change_shield(shield)
-#func receive_damage(damage: int, vector: Vector2, attack_phase: int = 0):
-#  if damage > 0 and !self.is_invulnerable:
-#    .receive_damage(damage, vector, attack_phase)
-#    $Sprite/SFXDamageSound.get_child(randi()%2).play()
-#    
-#    self.is_invulnerable = true
-#    $InvulnerabilityTimer.start()
+	
+func receive_damage(damage: int, vector: Vector2, attack_phase: int = 0):
+	if damage > 0 and !self.is_invulnerable:
+		.receive_damage(damage, vector, attack_phase)
+		#$Sprite/SFXDamageSound.get_child(randi()%2).play()
+	
+		self.is_invulnerable = true
+		$InvulnerabilityTimer.start()
 
 func update_direction_from_input():
 	self.direction = Vector2(
@@ -204,10 +205,6 @@ func check_contact_to_interact():
 		if area.is_in_group("interactarea"):
 			area.get_parent().interact()
 			break
-
-
-
-
 
 func _on_Area2D_body_entered(body):
 	pass # Replace with function body.

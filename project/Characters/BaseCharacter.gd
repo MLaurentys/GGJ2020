@@ -5,11 +5,12 @@ signal hit(damage)
 
 const SPEED_EPSILON: float = 2e-5
 
-export(float) var damage = 20
+#export(float) var damage = 20
 export(float) var acceleration := 100.0
 export(float) var max_speed: float
 export(int) var max_health: int
 
+var hud
 var health: int
 var direction: Vector2 = Vector2() setget set_direction
 var velocity: float = 0
@@ -21,6 +22,8 @@ func set_health(value):
   emit_signal("hit", value)
 
 func _ready():
+	var locator = Locator.new(get_tree())
+	hud = locator.find_entity("HUD")
 	self.health = max_health
 
 func _physics_process(_delta) -> void:
@@ -57,7 +60,12 @@ func is_dead() -> bool:
 func set_direction(vector) -> void:
 	direction = vector.normalized()
 
+func change_health(amt :int):
+	health += amt
+	hud.change_health(health)
+	
 func receive_damage(damage: int, origin: Vector2, attack_phase: int = 0):
 	if not self.is_dead():
-		health -= damage
+		change_health(-damage)
+		#health -= damage
 		emit_signal('hit', health)
