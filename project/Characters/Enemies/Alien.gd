@@ -23,7 +23,8 @@ export var windup_duration = 0.5
 export var attack_duration = 1.0
 
 var dive = null
-#func _ready():
+func _ready():
+	hud = $HealthBar
 	#var wave_manager = locator.find_entity('wave_manager')
 	#self.connect('die', wave_manager, 'count_enemy_deaths')
 
@@ -49,11 +50,12 @@ func _physics_process(delta: float) -> void:
 
 func _process(_delta):
 	if self.stagger_duration > 0:
-		$ProgressBar.modulate = Color(1, 1, 1, 1) * (1 + 5 * self.staggering / self.stagger_duration)
+		$HealthBar.modulate = Color(1, 1, 1, 1) * (1 + 5 * self.staggering / self.stagger_duration)
 
-func receive_damage(damage_amount: int, origin, attack_phase: int = 0):
+func receive_damage(damage_amount: int):
 	if !self.is_dead():
-		.receive_damage(damage_amount, origin.position)
+		health += -damage_amount
+		$HealthBar/Health.rect_size.x = health
 		
 		#if attack_phase == 0:
 			#impact_sounds.get_node("Strong/Impact0").play()
@@ -92,7 +94,7 @@ func check_contact():
 	if $DamageCooldown.time_left <= 0:
 		for area in $Area2D.get_overlapping_areas():
 			if area.is_in_group("player"):
-				var damage_vector: Vector2 = (area.position - self.position).normalized()
-				area.get_parent().receive_damage(self.damage, damage_vector)
+				#var damage_vector: Vector2 = (area.position - self.position).normalized()
+				area.get_parent().receive_damage(self.damage)
 				$DamageCooldown.start()
 				break

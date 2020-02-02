@@ -15,7 +15,7 @@ func _ready() -> void:
 	var overlapping_areas = area2D.get_overlapping_areas()
 	for area in overlapping_areas:
 		if area.is_in_group("enemy"):
-			area.get_parent().receive_damage(player.player_damage, self, player.get_node("Sprite").last_attack)
+			area.get_parent().receive_damage(player.damage)
 	
 	yield(get_tree().create_timer(cooldown), "timeout")
 	player.attacking = false

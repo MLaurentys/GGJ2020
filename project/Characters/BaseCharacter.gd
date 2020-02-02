@@ -22,8 +22,6 @@ func set_health(value):
   emit_signal("hit", value)
 
 func _ready():
-	var locator = Locator.new(get_tree())
-	hud = locator.find_entity("HUD")
 	self.health = max_health
 
 func _physics_process(_delta) -> void:
@@ -60,12 +58,3 @@ func is_dead() -> bool:
 func set_direction(vector) -> void:
 	direction = vector.normalized()
 
-func change_health(amt :int):
-	health += amt
-	hud.change_health(health)
-	
-func receive_damage(damage: int, origin: Vector2, attack_phase: int = 0):
-	if not self.is_dead():
-		change_health(-damage)
-		#health -= damage
-		emit_signal('hit', health)

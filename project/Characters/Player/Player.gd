@@ -93,10 +93,17 @@ func change_attack(amt :int):
 func change_shield(amt :int):
 	shield += amt
 	hud.change_shield(shield)
+
+func change_health(damage):
+	health += damage
+	hud.change_health(health)
 	
-func receive_damage(damage: int, vector: Vector2, attack_phase: int = 0):
+func receive_damage(damage: int):
 	if damage > 0 and !self.is_invulnerable:
-		.receive_damage(damage, vector, attack_phase)
+		if not self.is_dead():
+			change_health(-damage)
+			emit_signal('hit', health)
+			
 		#$Sprite/SFXDamageSound.get_child(randi()%2).play()
 	
 		self.is_invulnerable = true
