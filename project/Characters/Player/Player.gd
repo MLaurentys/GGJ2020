@@ -46,6 +46,7 @@ func _ready():
 	hud = locator.find_entity("HUD")
 	$DashCooldown.wait_time = dash_cooldown
 	state_machine = $AnimationTree.get("parameters/playback")
+	change_health(-10)
 
 func _physics_process(delta):
 	if not attacking and not dashing:
@@ -85,6 +86,7 @@ func _input(event: InputEvent) -> void:
 					state_machine.travel("Attack_Upward")
 				else:
 					state_machine.travel("Attack_Right")
+			$Attack.play_sound_once()
 
 func get_closest_cardinal_angle(angle):
 	if angle >= -PI/4 and angle <= PI/4:
@@ -97,22 +99,42 @@ func get_closest_cardinal_angle(angle):
 		return -PI/2
 
 func change_energy(amt):
+	if(amt > 0): play_heal()
 	move_spd_buff_time += amt
 	hud.change_energy(move_spd_buff_time)
 func change_attack(amt):
+	if(amt > 0): play_heal()
 	attack_buff_time += amt
 	hud.change_attack(attack_buff_time)
 func change_shield(amt):
+	if(amt > 0): play_heal()
 	shield_buff_time += amt
 	hud.change_shield(shield_buff_time)
-
 func change_health(damage):
+	if(amt > 0): play_heal()
 	health += damage
 	hud.change_health(health)
 	
+func play_move_animation(direction, movement, velocity):
+	if (velocity != 0):
+		if direction.x == 0 and direction.y < 0:
+			state_machine.travel("Walk_Upward")
+		elif direction.x == 0 and direction.y > 0:
+			state_machine.travel("Walk_Downward")
+		elif direction.x > 0 and direction.y == 0:
+			state_machine.travel("Walk_Rightward")
+		elif direction.x < 0 and direction.y == 0:
+			state_machine.travel("Walk_Leftward")
+	elif not attacking:
+		state_machine.travel("Rest")
+	
+func play_heal():
+	$Heal.play_sound_once()
+
 func receive_damage(damage: int):
 	if damage > 0 and !self.is_invulnerable:
 		if not self.is_dead():
+			$TakeDamage.play_sound_once()
 			if shield_buff_time > 0:
 				var final_dmg = max(0, damage - resistance)
 				change_health(-final_dmg)
@@ -209,7 +231,7 @@ func handle_dash_input():
 			$Sprite/AnimationPlayer.current_animation = "Dash_Downward"
 			setup_dash()
 		$Sprite/AnimationPlayer.play()
-		
+		$Dash.play_sound_once()
 func setup_dash():
 	#$Sprite/SFXDash.pitch_scale = randf() + 1.0
 	#$Sprite/SFXDash.play()
