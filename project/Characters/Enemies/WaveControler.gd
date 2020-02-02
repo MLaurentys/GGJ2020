@@ -2,8 +2,8 @@ extends Node
 
 const PORTAL_THRESHOLD = 0.5
 const SPAWNER_TIME_BASE = 2
-const SPAWNER_MONSTERS_BASE = 1
-const SPAWNS_PER_WAVE = [2, 5, 12]
+const SPAWNER_MONSTERS_BASE = 2
+const SPAWNS_PER_WAVE = [3, 8, 12]
 const SPAWNER_SCN = preload("res://Characters/Enemies/Spawner.tscn")
 
 onready var new_enemies = []
