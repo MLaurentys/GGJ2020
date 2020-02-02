@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Buildings/BaseBuildings.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Buildings/Speed/Speed.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Game/Buildings/speed.png" type="Texture" id=3]
+
+[node name="Speed" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2( 0, -56.4679 )
+
+[node name="InteractionArea" parent="." index="1"]
+position = Vector2( 0, -56.4679 )
+
+[node name="ProgressBar" parent="." index="2"]
+margin_top = -149.237
+margin_bottom = -135.238
+
+[node name="FixArea" parent="." index="3"]
+position = Vector2( 0, -56.4679 )
+
+[node name="Sprite" parent="." index="4"]
+texture = ExtResource( 3 )
