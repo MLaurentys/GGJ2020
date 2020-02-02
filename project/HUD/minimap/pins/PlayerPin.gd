@@ -11,6 +11,9 @@ func _ready():
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func update_state():
+	var posi = ref_object.position
+	pos = [posi.x/(global.spawn_area[2] - global.spawn_area[0]),
+			 posi.y/(global.spawn_area[3] - global.spawn_area[1])]
+	set_disp_pos()
+	

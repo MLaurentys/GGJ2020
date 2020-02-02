@@ -366,10 +366,10 @@ shape = SubResource( 17 )
 
 [node name="Camera2D" type="Camera2D" parent="." index="9"]
 current = true
-limit_left = -2000
-limit_top = -2000
-limit_right = 2000
-limit_bottom = 2000
+limit_left = -1000
+limit_top = -1000
+limit_right = 3000
+limit_bottom = 3000
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 

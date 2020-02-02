@@ -213,5 +213,5 @@ func check_contact_to_interact():
 			area.get_parent().interact()
 			break
 
-func _on_Area2D_body_entered(body):
+func _on_Area2D_body_entered(_body):
 	pass # Replace with function body.
