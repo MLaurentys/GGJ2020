@@ -7,7 +7,7 @@ onready var locator = Locator.new(get_tree())
 onready var player = locator.find_entity("player")
 
 func _ready():
-	self.health= max_health/2
+	self.health= max_health/2.0
 	$ProgressBar.setHealth()
 	
 func fix_building():
@@ -16,6 +16,17 @@ func fix_building():
 		$ProgressBar.setHealth()
 		return true
 	return false
-		
+
+func get_attacked(dmg :int):
+	if health < dmg:
+		health = 0
+		$FixArea.remove_from_group("fixarea")
+		$Sprite.frame = 2
+		return
+	health -= dmg
+	if health < max_health/2:
+		$Sprite.frame = 1
+	$ProgressBar.setHealth()
+	
 func interact():
 	pass

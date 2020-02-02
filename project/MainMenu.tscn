@@ -1,28 +1,112 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://Assets/MainMenu/playbutton.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Fonts/Matchup/MatchupPro-16.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Scripts/Menu/PlayButton.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Music/menu_music_master.wav" type="AudioStream" id=3]
 [ext_resource path="res://play_sound.gd" type="Script" id=4]
 [ext_resource path="res://Assets/SFX/ui_select.wav" type="AudioStream" id=5]
 [ext_resource path="res://Assets/SFX/ui_confirm.wav" type="AudioStream" id=6]
+[ext_resource path="res://GUI/MenuButton.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/MainMenu/background.png" type="Texture" id=8]
+[ext_resource path="res://Assets/MainMenu/checkbox.png" type="Texture" id=9]
+[ext_resource path="res://Scripts/Menu/QuitButton.gd" type="Script" id=10]
+[ext_resource path="res://Assets/Fonts/Matchup/MatchupPro-48.tres" type="DynamicFont" id=11]
+[ext_resource path="res://Scripts/Menu/CreditsButton.gd" type="Script" id=12]
 
-[node name="MainMenu" type="Control"]
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 9 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 9 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+[node name="MainMenu" type="Control" groups=[
+"menu",
+]]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 3.15784
-margin_right = 3.15784
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Background" type="Sprite" parent="."]
+[node name="Background" type="TextureRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+texture = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+autoplay = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+custom_constants/margin_right = 400
+custom_constants/margin_top = 325
+custom_constants/margin_left = 400
+custom_constants/margin_bottom = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_left = 400.0
+margin_top = 325.0
+margin_right = 624.0
+margin_bottom = 600.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Play" parent="MarginContainer/VBoxContainer" instance=ExtResource( 7 )]
+margin_right = 224.0
+text = "Play"
+script = ExtResource( 2 )
+
+[node name="Effect" type="AudioStreamPlayer" parent="MarginContainer/VBoxContainer/Play"]
+stream = ExtResource( 6 )
+volume_db = 5.306
+script = ExtResource( 4 )
+
+[node name="Credits" parent="MarginContainer/VBoxContainer" instance=ExtResource( 7 )]
+margin_top = 53.0
+margin_right = 224.0
+margin_bottom = 102.0
+text = "Credits"
+script = ExtResource( 12 )
+
+[node name="Effect" type="AudioStreamPlayer" parent="MarginContainer/VBoxContainer/Credits"]
+stream = ExtResource( 6 )
+volume_db = 5.306
+script = ExtResource( 4 )
+
+[node name="Quit" parent="MarginContainer/VBoxContainer" instance=ExtResource( 7 )]
+margin_top = 106.0
+margin_right = 224.0
+margin_bottom = 155.0
+text = "Quit"
+script = ExtResource( 10 )
+
+[node name="Effect" type="AudioStreamPlayer" parent="MarginContainer/VBoxContainer/Quit"]
+stream = ExtResource( 6 )
+volume_db = 5.306
+script = ExtResource( 4 )
 
 [node name="EnableTutorial" type="CheckBox" parent="."]
-margin_left = 516.67
-margin_top = 337.764
-margin_right = 715.67
-margin_bottom = 392.764
+margin_left = 660.0
+margin_top = 335.0
+margin_right = 884.0
+margin_bottom = 359.0
+custom_icons/checked = SubResource( 1 )
+custom_icons/unchecked = SubResource( 2 )
+custom_styles/focus = SubResource( 3 )
+custom_fonts/font = ExtResource( 1 )
 text = "Enable Tutorial Insight"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -32,27 +116,20 @@ __meta__ = {
 stream = ExtResource( 5 )
 script = ExtResource( 4 )
 
-[node name="Play" type="TextureButton" parent="."]
-margin_left = 478.526
-margin_top = 413.526
-margin_right = 578.526
-margin_bottom = 513.526
-texture_normal = ExtResource( 1 )
-script = ExtResource( 2 )
+[node name="Name" type="Label" parent="."]
+margin_top = 125.0
+margin_right = 1024.0
+margin_bottom = 204.0
+custom_fonts/font = ExtResource( 11 )
+text = "Some Big Great Name"
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Effect" type="AudioStreamPlayer" parent="Play"]
-stream = ExtResource( 6 )
-volume_db = 5.306
-script = ExtResource( 4 )
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 3 )
-autoplay = true
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="MarginContainer/VBoxContainer/Play" method="_on_Play_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Credits" to="MarginContainer/VBoxContainer/Credits" method="_on_Credits_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="MarginContainer/VBoxContainer/Quit" method="_on_Quit_pressed"]
 [connection signal="button_down" from="EnableTutorial" to="EnableTutorial/Effect" method="play_sound_once"]
 [connection signal="button_up" from="EnableTutorial" to="EnableTutorial/Effect" method="play_sound_once"]
 [connection signal="finished" from="EnableTutorial/Effect" to="EnableTutorial/Effect" method="_on_Effect_finished"]
-[connection signal="button_down" from="Play" to="Play/Effect" method="play_sound_once"]
-[connection signal="pressed" from="Play" to="Play" method="_on_Play_pressed"]

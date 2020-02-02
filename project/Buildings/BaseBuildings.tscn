@@ -23,7 +23,8 @@ func _ready():
 	
 func setHealth():
 	var building = get_parent()
-	self.value = 100.0 * building.health / building.max_health
+	var newv = float(building.health) / float(building.max_health)
+	self.value = 100.0 * newv
 "
 
 [sub_resource type="CapsuleShape2D" id=6]
