@@ -239,7 +239,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="GameOverMenu" type="Control" parent="CanvasLayer" groups=[
+[node name="GameOverMenu" parent="CanvasLayer" groups=[
 "gameover",
 ] instance=ExtResource( 11 )]
 pause_mode = 2

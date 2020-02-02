@@ -443,12 +443,12 @@ script = ExtResource( 5 )
 
 [node name="TakeDamage" type="AudioStreamPlayer2D" parent="." index="12"]
 stream = ExtResource( 7 )
-volume_db = 10.0
+volume_db = 7.0
 script = ExtResource( 5 )
 
 [node name="Dash" type="AudioStreamPlayer2D" parent="." index="13"]
 stream = ExtResource( 8 )
-volume_db = 6.783
+volume_db = 3.5
 script = ExtResource( 5 )
 
 [node name="Heal" type="AudioStreamPlayer2D" parent="." index="14"]

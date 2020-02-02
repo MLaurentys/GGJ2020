@@ -13,7 +13,13 @@ func load_player(plyer):
 func load_wave_controller(controller):
 	wave_controller = controller
 func load_buildings(building_list):
-	buildings = building_list
+	var builds = building_list
+	for b in builds:
+		var bu = $PinGenerator.create_pin("building", b)
+		bu.set_pos()
+		add_child(bu)
+		buildings.append(bu)
+		
 
 #loaded every physics frame
 func load_enemies():
