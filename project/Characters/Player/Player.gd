@@ -110,9 +110,9 @@ func change_shield(amt):
 	if(amt > 0): play_heal()
 	shield_buff_time += amt
 	hud.change_shield(shield_buff_time)
-func change_health(damage):
+func change_health(amt):
 	if(amt > 0): play_heal()
-	health += damage
+	health += amt
 	hud.change_health(health)
 	
 func play_move_animation(direction, movement, velocity):
