@@ -104,11 +104,11 @@ func play_heal():
 
 
 
-func receive_damage(damage: int):
-	if damage > 0 and !self.is_invulnerable:
+func receive_damage(dmg: int):
+	if dmg > 0 and !self.is_invulnerable:
 		if not self.is_dead():
 			$TakeDamage.play_sound_once()
-			change_health(-damage)
+			change_health(-dmg)
 			emit_signal('hit', health)
 		self.is_invulnerable = true
 		$InvulnerabilityTimer.start()

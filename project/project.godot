@@ -33,13 +33,19 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://Characters/Player/Player.gd"
+}, {
+"base": "BaseCharacter",
+"class": "alien",
+"language": "GDScript",
+"path": "res://Characters/Enemies/Alien.gd"
 } ]
 _global_script_class_icons={
 "BaseBuildings": "",
 "BaseCharacter": "",
 "Locator": "",
 "Pin": "",
-"Player": ""
+"Player": "",
+"alien": ""
 }
 
 [application]
