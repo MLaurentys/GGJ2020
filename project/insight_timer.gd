@@ -17,4 +17,4 @@ func _ready():
 
 
 func _on_Timer_timeout():
-	get_parent().scale = Vector2(0,0)
+	get_parent().scale = Vector2(0.0001,0)

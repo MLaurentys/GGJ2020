@@ -17,5 +17,5 @@ func _process(_delta):
 		if $Minimap.scale == Vector2(0,0):
 			$Minimap.scale = Vector2(1,1)
 		else:
-			$Minimap.scale = Vector2(0,0)
+			$Minimap.scale = Vector2(0.0001,0.0001)
 

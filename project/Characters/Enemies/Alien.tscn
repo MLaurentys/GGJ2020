@@ -226,6 +226,10 @@ switch_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id=30]
 switch_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+
 [sub_resource type="AnimationNodeStateMachineTransition" id=33]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=34]
@@ -240,11 +244,7 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=39]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=40]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=41]
-
-[sub_resource type="AnimationNodeStateMachine" id=31]
+[sub_resource type="AnimationNodeStateMachine" id=40]
 states/attack_down/node = SubResource( 13 )
 states/attack_down/position = Vector2( 95, 34 )
 states/attack_left/node = SubResource( 14 )
@@ -265,12 +265,12 @@ states/walk_right/node = SubResource( 21 )
 states/walk_right/position = Vector2( 173, 252 )
 states/walk_up/node = SubResource( 22 )
 states/walk_up/position = Vector2( 69, 192 )
-transitions = [ "idle", "attack_down", SubResource( 23 ), "idle", "attack_left", SubResource( 24 ), "idle", "attack_right", SubResource( 25 ), "idle", "attack_up", SubResource( 26 ), "attack_down", "idle", SubResource( 27 ), "attack_left", "idle", SubResource( 28 ), "attack_right", "idle", SubResource( 29 ), "attack_up", "idle", SubResource( 30 ), "walk_up", "idle", SubResource( 33 ), "walk_right", "idle", SubResource( 34 ), "walk_left", "idle", SubResource( 35 ), "walk_down", "idle", SubResource( 36 ), "idle", "walk_up", SubResource( 37 ), "idle", "walk_right", SubResource( 38 ), "idle", "walk_left", SubResource( 39 ), "idle", "walk_down", SubResource( 40 ), "idle", "die", SubResource( 41 ) ]
+transitions = [ "idle", "attack_down", SubResource( 23 ), "idle", "attack_left", SubResource( 24 ), "idle", "attack_right", SubResource( 25 ), "idle", "attack_up", SubResource( 26 ), "attack_down", "idle", SubResource( 27 ), "attack_left", "idle", SubResource( 28 ), "attack_right", "idle", SubResource( 29 ), "attack_up", "idle", SubResource( 30 ), "walk_up", "idle", SubResource( 31 ), "walk_right", "idle", SubResource( 32 ), "walk_left", "idle", SubResource( 33 ), "walk_down", "idle", SubResource( 34 ), "idle", "walk_up", SubResource( 35 ), "idle", "walk_right", SubResource( 36 ), "idle", "walk_left", SubResource( 37 ), "idle", "walk_down", SubResource( 38 ), "idle", "die", SubResource( 39 ) ]
 start_node = "idle"
 end_node = "die"
 graph_offset = Vector2( 0, 63.992 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=32]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=41]
 
 [node name="Alien" groups=[
 "enemy",
@@ -285,7 +285,7 @@ texture = ExtResource( 2 )
 offset = Vector2( 0, -32 )
 vframes = 5
 hframes = 10
-frame = 43
+frame = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 visible = false
@@ -332,8 +332,8 @@ anims/walk_right = SubResource( 11 )
 anims/walk_up = SubResource( 12 )
 
 [node name="AnimationTree" type="AnimationTree" parent="." index="8"]
-tree_root = SubResource( 31 )
+tree_root = SubResource( 40 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 32 )
+parameters/playback = SubResource( 41 )
 [connection signal="timeout" from="GetTarget" to="." method="change_target"]
