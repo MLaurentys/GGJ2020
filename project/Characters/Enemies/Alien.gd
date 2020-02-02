@@ -117,6 +117,8 @@ func change_target():
 	get_new_target()
 
 func check_contact():
+	if not toDel:
+		pass
 	if $DamageCooldown.time_left <= 0:
 		var areas = $Area2D.get_overlapping_areas()
 		var imps = []
