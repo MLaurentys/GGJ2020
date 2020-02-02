@@ -1,23 +1,9 @@
-extends TextureButton
+extends Button
 
-
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-
-
-
-
-func _on_Play_pressed():
-	global.play_tutorial = get_node("../EnableTutorial").pressed
-	var error_flag = get_tree().change_scene("res://Game.tscn")
+func _on_Play_pressed() -> void:
+	$Effect.play()
+	var tree = self.get_tree()
+	var locator: Locator = Locator.new(tree)
+	var menu = locator.find_entity("menu")
+	global.play_tutorial = menu.get_node("EnableTutorial").pressed
+	var error_flag = tree.change_scene("res://Game.tscn")

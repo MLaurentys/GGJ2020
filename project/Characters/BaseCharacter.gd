@@ -32,8 +32,12 @@ func _physics_process(_delta) -> void:
 		self.direction = remaining_movement
 		self.velocity = remaining_movement.length()
 		deaccelerate()
-		#if has_node("Sprite") and $Sprite is CreatureSpriteBase:$Sprite.move(movement)
+		if self.is_in_group("player"):
+			self.play_move_animation(direction, movement, velocity)
 
+func play_move_animation(direction, movement, velocity):
+	pass
+	
 func accelerate() -> void:
 	if self.direction.length_squared() > 0:
 		self.velocity += acceleration
