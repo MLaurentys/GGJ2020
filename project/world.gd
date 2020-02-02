@@ -19,3 +19,8 @@ func _process(_delta):
 		else:
 			$Minimap.scale = Vector2(0.0001,0.0001)
 
+
+
+func _on_Completion_timeout():
+	get_tree().pause()
+	pass # Replace with function body.
