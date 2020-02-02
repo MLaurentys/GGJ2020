@@ -9,7 +9,7 @@ const SPAWNER_SCN = preload("res://Characters/Enemies/Spawner.tscn")
 onready var new_enemies = []
 var timer_sequence = [20, 20, 120]
 ################### voltar pra 10 quando for lançar
-var intervals = [1, 10, 10]
+var intervals = [0.01, 10, 10]
 var portal_timer = [90, 30]
 
 var check_portal_life = false
@@ -17,6 +17,7 @@ var wave_index = 0
 var portal
 var tileset
 
+onready var toClear = false
 func _ready():
 	$IntervalTimer.wait_time = intervals[0]
 	$PortalTimer.wait_time = portal_timer[0]
@@ -28,7 +29,10 @@ func _ready():
 	portal = locator.find_entity("portal")
 	tileset = locator.find_entity("tileset")
 
-func _process(delta):
+func _physics_process(delta):
+	if toClear:
+		toClear = false
+		new_enemies = []
 	if not check_portal_life:
 		pass
 	
@@ -38,27 +42,33 @@ func _process(delta):
 	
 func get_new_enemies():
 	var ne = new_enemies
-	new_enemies.clear()
+	if(new_enemies.size() > 0):
+		toClear = true
 	return ne
+
+func assert_new_enemy(ene):
+	new_enemies.append(ene)
 
 func create_new_wave():
 	var spawners_spawned = 0
-	var lim_x = int(global.spawn_area[2]/32)
-	var lim_y = int(global.spawn_area[3]/32)
+	var lim_x = int(global.spawn_area[2])
+	var lim_y = int(global.spawn_area[3])
 	
 	while(spawners_spawned < SPAWNS_PER_WAVE[wave_index]):
 		var x = randi() % lim_x
 		var y = randi() % lim_y
 		
-		var tile_index = tileset.get_cell(x, y)
+		var tile_index = tileset.get_cell(x/32, y/32)
 		
 		if tile_index == 2:
 			continue
 			
 		var sp = SPAWNER_SCN.instance()
-		sp.get_node("SpawnTimer").wait_time = SPAWNER_TIME_BASE - randi() % 2 - wave_index
+		sp.get_node("SpawnTimer").wait_time = SPAWNER_TIME_BASE - randi() % 2 - wave_index - 2
 		
 		sp.get_node("SpawnTimer").monsters_to_spawn = SPAWNER_MONSTERS_BASE + randi() % 2 + wave_index
+		
+		sp.get_node("SpawnTimer").controller = self
 		
 		sp.position = Vector2(x, y)
 		add_child(sp)

@@ -17,7 +17,7 @@ signal die
 
 var attacking = false
 var staggering = 0
-
+var toDel = false
 
 export var windup_duration = 0.5
 export var attack_duration = 1.0
@@ -32,6 +32,8 @@ func is_staggering():
 	return self.staggering > 0
 
 func _physics_process(delta: float) -> void:
+	if(toDel):
+		pass
 	self.staggering = max(0, self.staggering - delta)
 	if not self.is_dead() and not self.attacking and not self.is_staggering():
 		if $Tracker.is_within_range(self):
@@ -69,9 +71,9 @@ func receive_damage(damage_amount: int):
 				self.collision_mask = 0
 				$Sprite.die()
 				yield($Sprite, "death_ended")
-				self.queue_free()
+				toDel = true
 			else:
-				self.queue_free()
+				toDel = true				
 		else:
 			self.stop_attack()
 			self.staggering = self.stagger_duration

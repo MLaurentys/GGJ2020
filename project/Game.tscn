@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Assets/Game/Tilesets/lpc-terrains/lpc-terrains/terrain-v7.png" type="Texture" id=1]
 [ext_resource path="res://Characters/Player/Player.tscn" type="PackedScene" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://Characters/Enemies/WaveControler.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Game/Background/set9-example5.png" type="Texture" id=6]
 [ext_resource path="res://Buildings/Portal/Portal.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Characters/Enemies/Alien.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Buildings/Hospital/Hospital.tscn" type="PackedScene" id=9]
 
 [sub_resource type="TileSet" id=1]
@@ -111,12 +110,6 @@ layer = 0
 position = Vector2( 1427.11, 709.975 )
 collision_layer = 1
 collision_mask = 1
-
-[node name="Alien" parent="." instance=ExtResource( 8 )]
-position = Vector2( 819.418, 611.805 )
-
-[node name="Alien2" parent="." instance=ExtResource( 8 )]
-position = Vector2( 625.621, 611.805 )
 
 [node name="StaticBody2D2" parent="." instance=ExtResource( 9 )]
 position = Vector2( 1019.09, 1149.15 )

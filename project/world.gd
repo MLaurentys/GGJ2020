@@ -15,7 +15,9 @@ func _ready():
 	global.spawn_area[3] =t.size.y * 32
 	pass # Replace with function body.
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _process(delta):
+	if Input.is_action_just_pressed("toggle_minimap"):
+		if $Minimap.scale == Vector2(0,0):
+			$Minimap.scale = Vector2(1,1)
+		else:
+			$Minimap.scale = Vector2(0,0)

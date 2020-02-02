@@ -18,16 +18,13 @@ func load_buildings(building_list):
 #loaded every physics frame
 func load_enemies():
 	current_enemies = $Enemies.get_children()
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
 	var newer = wave_controller.get_new_enemies()
 	for en in newer:
 		$Enemies.add_child($PinGenerator.create_pin("enemy", en))
+	load_enemies()
 	for b in buildings:
 		b.update_state()
 	player.update_state()
