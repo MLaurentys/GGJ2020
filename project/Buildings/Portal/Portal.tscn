@@ -1,8 +1,11 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Buildings/BaseBuildings.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Buildings/Portal/Portal.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Game/Buildings/portal.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 54.3884, 81.7282 )
 
 [sub_resource type="Gradient" id=1]
 offsets = PoolRealArray( 0, 0.510917, 1 )
@@ -41,8 +44,9 @@ color_ramp = SubResource( 2 )
 position = Vector2( 0, -12.4966 )
 script = ExtResource( 2 )
 
-[node name="CollisionShape2D" parent="." index="0"]
-position = Vector2( 0, -27.6932 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+position = Vector2( 0, -70.4449 )
+shape = SubResource( 6 )
 
 [node name="ProgressBar" parent="." index="2"]
 margin_top = -170.0
@@ -53,7 +57,7 @@ position = Vector2( 0, 0 )
 texture = ExtResource( 3 )
 offset = Vector2( 0, -75 )
 
-[node name="Particles2D" type="Particles2D" parent="." index="5"]
+[node name="Particles2D" type="Particles2D" parent="." index="6"]
 position = Vector2( 0, -70 )
 scale = Vector2( 0.6, 1 )
 amount = 2000

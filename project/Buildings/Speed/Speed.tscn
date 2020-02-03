@@ -1,14 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Buildings/BaseBuildings.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Buildings/Speed/Speed.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Game/Buildings/speed.png" type="Texture" id=3]
 
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 73.9749, 58.189 )
+
 [node name="Speed" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
-[node name="CollisionShape2D" parent="." index="0"]
-position = Vector2( 0, -56.4679 )
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+position = Vector2( 0, -66.4601 )
+shape = SubResource( 1 )
 
 [node name="InteractionArea" parent="." index="1"]
 position = Vector2( 0, -56.4679 )
