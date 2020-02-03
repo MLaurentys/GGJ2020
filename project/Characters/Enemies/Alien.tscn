@@ -278,6 +278,7 @@ graph_offset = Vector2( 0, 63.992 )
 collision_layer = 2
 collision_mask = 19
 script = ExtResource( 3 )
+damage = 10.0
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 scale = Vector2( 0.52, 0.52 )

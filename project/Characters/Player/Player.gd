@@ -6,7 +6,7 @@ signal player_died
 
 const DAMAGE_BOX_SCN = preload("res://Characters/Player/DamageBox.tscn")
 
-export(float) var damage = 20
+export(float) var damage = 30
 export(float) var dash_time = 0.15
 export(float) var dash_length = 100
 export(float) var dash_cooldown = 0.7
@@ -17,7 +17,7 @@ var dash_direction: Vector2
 var dashing := false
 var dash_speed: float = dash_length / dash_time
 
-var buff_drop_rate = 10
+var buff_drop_rate = 8
 
 var locator
 
@@ -25,7 +25,7 @@ onready var move_spd_buff_time = 100
 onready var attack_buff_time = 100
 onready var shield_buff_time = 100
 
-var move_spd_buff_amount = 80
+var move_spd_buff_amount = 120
 var attack_buff_amount = 100
 var shield_buff_amount = 10
 
