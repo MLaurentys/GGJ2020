@@ -36,7 +36,8 @@ func is_staggering():
 
 func _physics_process(delta: float) -> void:
 	if(toDel):
-		pass
+		return
+		
 	self.staggering = max(0, self.staggering - delta)
 	if not self.is_dead() and not self.attacking and not self.is_staggering():
 		if is_within_range():
@@ -61,14 +62,15 @@ func _physics_process(delta: float) -> void:
 	state_machine = $AnimationTree.get("parameters/playback")
 
 func _process(_delta):
-	if(toDel):
-		pass
-	track()
 	if self.stagger_duration > 0:
 		$HealthBar.modulate = Color(1, 1, 1, 1) * (1 + 5 * self.staggering / self.stagger_duration)
+	if(toDel):
+		self.block_movement = true
+		return
+	track()
 
 func play_move_animation(direction, velocity):
-	if (velocity != 0) and not self.attacking:
+	if (velocity != 0) and not self.attacking and not toDel:
 		if direction.x == 0 and direction.y < 0:
 			state_machine.travel("walk_up")
 		elif direction.x == 0 and direction.y > 0:
@@ -87,14 +89,9 @@ func receive_damage(damage_amount: int):
 		$HealthBar/Health.rect_size.x = health
 		if self.is_dead():
 			emit_signal('die')
-			if self.has_node("Sprite") and $Sprite.has_method("die"):
-				self.collision_layer = 0
-				self.collision_mask = 0
-				$Sprite.die()
-				yield($Sprite, "death_ended")
-				toDel = true
-			else:
-				toDel = true				
+			self.collision_layer = 0
+			self.collision_mask = 0
+			toDel = true
 		else:
 			self.stop_attack()
 			self.staggering = self.stagger_duration
@@ -117,8 +114,9 @@ func change_target():
 	get_new_target()
 
 func check_contact():
-	if not toDel:
-		pass
+	if toDel:
+		return
+
 	if $DamageCooldown.time_left <= 0:
 		var areas = $Area2D.get_overlapping_areas()
 		var imps = []
@@ -131,18 +129,14 @@ func check_contact():
 				$DamageCooldown.start()
 				break
 			if area.is_in_group("player"):
-				#var damage_vector: Vector2 = (area.position - self.position).normalized()
 				area.get_parent().receive_damage(self.damage)
 				$DamageCooldown.start()
 				break
 
-				
 export(float) var amplitude = 0
 export(float) var period = 0.3
 
-
 var running = false
-
 
 func is_within_range() -> bool:
 	if target == null:
