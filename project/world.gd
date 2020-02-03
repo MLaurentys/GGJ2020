@@ -31,6 +31,8 @@ func _on_Completion_timeout():
 	
 func toggle_win_screen():
 	var youwin = locator.find_entity('youwin')
+	var sepia = locator.find_entity('sepia')
+	sepia.show()
 	youwin.show()
 	youwin.get_node("WinFanfare").play()
 	get_tree().paused = true
