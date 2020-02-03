@@ -155,6 +155,7 @@ func receive_damage(damage: int):
 			gameover.show()
 			sepia.show()
 			gameover.get_node("DefeatFanfare").play()
+			get_tree().paused = true
 
 func update_direction_from_input():
 	self.direction = Vector2(

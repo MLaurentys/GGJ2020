@@ -9,7 +9,6 @@ const SPAWNER_SCN = preload("res://Characters/Enemies/Spawner.tscn")
 var locator
 onready var new_enemies = []
 var timer_sequence = [30, 30, 120]
-################### voltar pra 10 quando for lançar
 var intervals = [10, 25, 10]
 var portal_timer = [90, 30]
 
@@ -17,6 +16,8 @@ var check_portal_life = false
 var wave_index = 0
 var portal
 var tileset
+var gameover
+var sepia
 
 onready var toClear = false
 func _ready():
@@ -29,6 +30,8 @@ func _ready():
 	locator = Locator.new(get_tree())
 	portal = locator.find_entity("portal")
 	tileset = locator.find_entity("tileset")
+	gameover = locator.find_entity('gameover')
+	sepia = locator.find_entity('sepia')
 
 func _physics_process(_delta):
 	if portal.health <= 0:
@@ -45,11 +48,13 @@ func _physics_process(_delta):
 		toggle_game_over_screen()
 	
 func toggle_game_over_screen():
-	var gameover = locator.find_entity('gameover')
-	var sepia = locator.find_entity('sepia')
+	if gameover.is_visible():
+		return
+
 	gameover.show()
 	sepia.show()
 	gameover.get_node("DefeatFanfare").play()
+	get_tree().paused = true
 	
 func get_new_enemies():
 	var ne = new_enemies
