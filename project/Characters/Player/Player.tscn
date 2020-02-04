@@ -249,7 +249,7 @@ tracks/0/keys = {
 extents = Vector2( 15.4621, 9.26397 )
 
 [sub_resource type="RectangleShape2D" id=17]
-extents = Vector2( 15.37, 25.2053 )
+extents = Vector2( 23.3284, 30.2099 )
 
 [sub_resource type="AnimationNodeAnimation" id=18]
 animation = "Attack_Downward"
