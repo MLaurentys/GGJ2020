@@ -4,25 +4,25 @@
 [ext_resource path="res://Buildings/Portal/Portal.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Game/Buildings/portal.png" type="Texture" id=3]
 
-[sub_resource type="RectangleShape2D" id=6]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 54.3884, 81.7282 )
 
-[sub_resource type="Gradient" id=1]
+[sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.510917, 1 )
 colors = PoolColorArray( 0.24324, 0.187042, 0.997559, 1, 0.475423, 0.25946, 0.609375, 1, 0.460017, 0.0607166, 0.575684, 1 )
 
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
 
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id=4]
 colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.705882 )
 
-[sub_resource type="GradientTexture" id=4]
-gradient = SubResource( 3 )
+[sub_resource type="GradientTexture" id=5]
+gradient = SubResource( 4 )
 
-[sub_resource type="ParticlesMaterial" id=5]
+[sub_resource type="ParticlesMaterial" id=6]
 trail_divisor = 3
-trail_color_modifier = SubResource( 4 )
+trail_color_modifier = SubResource( 5 )
 emission_shape = 1
 emission_sphere_radius = 60.0
 flag_disable_z = true
@@ -36,7 +36,7 @@ radial_accel = -35.0
 damping = 3.0
 scale = 3.0
 scale_random = 1.0
-color_ramp = SubResource( 2 )
+color_ramp = SubResource( 3 )
 
 [node name="StaticBody2D" groups=[
 "portal",
@@ -46,7 +46,7 @@ script = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 position = Vector2( 0, -70.4449 )
-shape = SubResource( 6 )
+shape = SubResource( 1 )
 
 [node name="ProgressBar" parent="." index="2"]
 margin_top = -170.0
@@ -62,7 +62,7 @@ position = Vector2( 0, -70 )
 scale = Vector2( 0.6, 1 )
 amount = 2000
 lifetime = 5.0
-process_material = SubResource( 5 )
+process_material = SubResource( 6 )
 __meta__ = {
 "_editor_description_": ""
 }
