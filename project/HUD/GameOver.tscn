@@ -39,7 +39,7 @@ __meta__ = {
 
 [node name="Effect" type="AudioStreamPlayer" parent="Retry"]
 stream = ExtResource( 2 )
-volume_db = 5.306
+volume_db = -12.0
 script = ExtResource( 7 )
 __meta__ = {
 "_editor_description_": ""
@@ -63,6 +63,7 @@ __meta__ = {
 }
 
 [node name="Effect" type="AudioStreamPlayer" parent="MainMenu"]
+volume_db = -12.0
 script = ExtResource( 7 )
 
 [node name="GameOverText" type="Label" parent="."]
